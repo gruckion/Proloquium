@@ -1,5 +1,5 @@
 [tool.black]
-line-length = 88
+line-length = 120
 include = '\.py$'
 exclude = '''
 /(
@@ -18,7 +18,7 @@ target-version = ['py39']
 
 [tool.isort]
 profile = "black"
-line_length = 88
+line_length = 120
 multi_line_output = 3
 py_version = 39
 src_paths = ["src"]

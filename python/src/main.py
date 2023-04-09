@@ -1,38 +1,27 @@
-"""Main module"""
+"""Main module."""
 
-import os
-
-import openai
-from dotenv import load_dotenv
+from common.config import settings
+from utils.task_management import TaskManager
 
 
 def main():
-    """Main function"""
+    """Main function."""
+    print("Starting task manager...")
 
-    load_dotenv()
+    print("\033[94m\033[1m" + "\n*****OBJECTIVE*****\n" + "\033[0m\033[0m")
+    print(f"{settings.OBJECTIVE}")
 
-    # Read API key from environment variable
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-
-    # Set up the API request parameters
-    prompt = "Once upon a time in a land far, far away..."
-    max_tokens = 50
-    temperature = 0.8
-
-    # Make the API request
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=max_tokens,
-        temperature=temperature,
-        n=1,
-        stop=None,
-        echo=False,
+    print(
+        "\033[93m\033[1m"
+        + "\nInitial task:"
+        + "\033[0m\033[0m"
+        + f" {settings.INITIAL_TASK}"
     )
 
-    # Extract and print the generated text
-    generated_text = response.choices[0].text
-    print(generated_text)
+    task_manager = TaskManager(
+        objective=settings.OBJECTIVE, initial_task=settings.INITIAL_TASK
+    )
+    task_manager.run()
 
 
 if __name__ == "__main__":

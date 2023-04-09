@@ -23,7 +23,7 @@
   "noImplicitSelf": true,
   "noFallthroughCasesInSwitch": true,
   "noUncheckedIndexedAccess": true,
-  "maxLineLength": 88,
+  "maxLineLength": 120,
   "verboseOutput": false,
   "strictListInference": true,
   "strictDictionaryInference": true,

@@ -1,9 +1,6 @@
 """Utility functions for interacting with the OpenAI API."""
 
-
 import functools
-import os
-import pickle
 import subprocess
 import time
 

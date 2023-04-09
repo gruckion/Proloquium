@@ -58,4 +58,6 @@ ENV PYTHONPATH="./src:$PYTHONPATH"
 COPY ./ ./
 
 # Run the application
-ENTRYPOINT ["python", "-m", "src.main"]
+# ENTRYPOINT ["python", "-m", "src.main"]
+
+CMD ["python", "src/main.py"]

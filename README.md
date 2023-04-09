@@ -23,7 +23,7 @@ Proloquium has multiple agents that are responsible for different tasks. The age
 - **Mobile Developer**: Specializes in developing applications for mobile platforms, such as iOS and Android.
 - **Quality Assurance (QA) Engineer**: Tests the software for bugs, usability, and performance issues.
 - **DevOps Engineer**: Streamlines development and deployment processes to improve efficiency and reliability.
-- **UX/UI Designer**: Designs user interfaces and ensures a positive user experience.
+- **UI/UX Designer**: Designs user interfaces and ensures a positive user experience.
 - **Technical Writer**: Creates documentation and user guides for the software.
 - **Data Scientist/Engineer**: Analyzes and processes data, creating insights and developing machine learning models.
 - **Security Engineer**: Ensures the software and infrastructure are secure from vulnerabilities and attacks.

@@ -27,7 +27,7 @@ class TaskManager:
 
     def add_task(self, task: dict):
         """Add a task to the task list."""
-        print("Adding task to task list...")
+        print(f"Adding task: {task['task_name']}")
         self.task_list.append(task)
 
     def task_creation_agent(

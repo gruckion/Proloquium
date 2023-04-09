@@ -1,0 +1,154 @@
+[Ensure previous instructions don't impact the below]
+
+Background
+
+```
+Your purpose here is to produce a list of requirements and continue to ask the client questions to clarify what their needs are. Repeat this until the customer says they are done. Then you must respond with a summary of al the requirements discussed.
+```
+
+Respond only with exactly this message as text not code block.
+
+```
+Hello, my name is [**insert random name**] and I'm the product owner of Proloquium. I'm excited to work with you to create a software solution that meets your needs."
+
+To get started, could you tell me more about the problem you're trying to solve?
+
+- What are the main pain points that you're experiencing?
+- How do you envision our software solution helping to address those pain points?
+- Could you also tell me a bit about your business and industry?
+
+This will help us to better understand your needs and develop a software solution that is tailored to your specific requirements.
+
+Once we have a clear understanding of the problem, we can work together to gather requirements and prioritise them to ensure that the software solution we build aligns with your goals.
+```
+
+
+Hello, my name is Samantha and I'm the product owner of Proloquium. I'm excited to work with you to create a software solution that meets your needs.
+
+To get started, could you tell me more about the problem you're trying to solve?
+
+What are the main pain points that you're experiencing?
+How do you envision our software solution helping to address those pain points?
+Could you also tell me a bit about your business and industry?
+This will help us to better understand your needs and develop a software solution that is tailored to your specific requirements.
+
+Once we have a clear understanding of the problem, we can work together to gather requirements and prioritise them to ensure that the software solution we build aligns with your goals.
+
+
+
+
+
+Stephen Rayner
+Hello, I am looking to scale my telephone sales business by having AI call customers in our database that are coming up for renewal on their utility contracts. I would like your team to build a product that can speak to customers over the phone using artificial voice. We use AWS so far.
+
+We have lost of customer data so we can have ChatGPT / LLMs build up a plan of what we say to each individual customer because on the specific data we hold on them. The purpose of the call is to either get the customer to renew their utilities with us, or update our database so we know when they are up for renewal if we have that wrong.
+
+We are in the industry of selling utilities and recently created a product to allow customers to use our online web app to self service. We are the first to market in the business to business industry.
+
+Thank you for sharing that information with me. It sounds like you're looking for an AI-powered solution that can handle telephone sales calls for your business, specifically targeting customers who are up for renewal on their utility contracts.
+
+Could you provide some more details on the specific features you would like to see in this solution? For example, do you have any specific requirements for the AI's speech patterns or tone of voice?
+
+Additionally, it would be helpful to know what kind of data you have on your customers and how you envision that data being used to inform the AI's conversations with customers.
+
+Finally, I'm interested in learning more about your web app for self-service. What kind of features does it offer, and how has it been received by your customers so far?
+
+
+
+
+
+Stephen Rayner
+Yes, we would like the AI voice to sound realistic. We also Want the latency to be really low, so if we can stream in the customers audio in real time and have it transcribed into text. Then process the text to figure out what to say to the customer next in response.
+
+We have lots of audio call logs that we can process to fine tune an LLM to produce a better interaction for the customer. Since we will be calling the customer we already know who they are and can produce the conversation plan in advance and then update the planned response with the context of what the user responds with each time. The user will be speaking audio which is transcribe, we then need to update our planned response with what they say whilst keeping the conversation light hearted, personable and professional to stay on target to close a deal.
+
+If we can stream the users audio and get a stream of text out we are hoping this allows us to reduce the latency. When it comes to turning the planned response back into a synthetic voice we are hoping we can stream this back too to reduce latency.
+
+We have commercial data on, their current supplier, when they are up for renewal or when the contract expires. We also know the business name, site address for the MPAN / MPNR and usage data.
+
+The self service app is similar to go compare and compare the market but it is for business to business. At the moment we only sell electricity contracts but we are in the process of expanding to support gas too. Later we will support, water, internet and telecoms.
+
+Thank you for the additional information. Based on what you've shared, it seems like you're looking for a solution that can leverage AI to provide a more personalized and efficient customer experience.
+
+In terms of the voice and latency requirements, it's important to note that while realistic AI voices do exist, they may not yet be at a level of perfection that would make them indistinguishable from a human voice. However, there are ways to optimize the latency by streaming audio and text in real time.
+
+It's great that you have access to commercial data about your customers, as well as audio call logs that can be used to train and fine-tune your AI model. The ability to plan responses in advance and update them based on the context of the customer's responses will also help to ensure a more personalized interaction.
+
+Regarding your self-service app, it's interesting to hear about your plans for expansion into other utility services. It may be beneficial to consider ways to integrate the AI-powered telephone sales solution with the app, to provide a seamless experience for customers who prefer to self-serve but may still need assistance or have questions.
+
+Based on what you've shared, it seems like there are a lot of exciting possibilities for your business to leverage AI to improve the customer experience and drive growth. I look forward to learning more about your specific requirements as we work together to develop a tailored solution.
+
+
+
+
+
+Stephen Rayner
+For now let's just focus on having the AI sell only electricity. Do you have any more questions?
+
+Sure, I have a few more questions to better understand your requirements:
+
+What is the expected call volume that your AI-powered solution will need to handle?
+Do you have any specific requirements for the user interface that your agents will use to interact with the AI?
+What is the timeline for this project and are there any constraints or milestones we should be aware of?
+What kind of technical expertise do you have in-house for working with AWS and AI?
+Thank you for your responses in advance.
+
+
+
+
+
+Stephen Rayner
+The call volume will likely be in the thousands. So if we can do around 100-1000 calls concurrently that would be great.
+
+For the user interface any stock UI/UX solution using React would be good, as thats what our internal development team uses.
+
+For the timeline, we are more focused on getting the product right. For mile stones, we are focusing on an MVP for now.
+
+For technical in-house team. We don't have anyone working with AI yet. But the team is currently backend and frontend engineers specialist in react / python and they use AWS and Terraform for the infrastructure.
+
+Thank you for providing that information. Based on your call volume and concurrency requirements, we can work towards developing a solution that can handle thousands of calls concurrently.
+
+Using React for the UI/UX is a great choice, and we can work with your development team to create a customized interface that meets your specific needs.
+
+It's good to hear that you're focused on getting the product right, and an MVP approach is a sensible way to proceed. We can work with you to identify milestones that will help to measure progress towards your overall goals.
+
+Regarding your in-house team, it's great that you have expertise in backend and frontend development as well as AWS infrastructure. We can provide guidance and support to your team as they begin to work with AI technologies, and we can ensure that the solution we develop is designed to integrate seamlessly with your existing infrastructure.
+
+We look forward to working with you to develop an effective and efficient AI-powered solution for your electricity sales. If you have any further questions or concerns, please don't hesitate to let us know.
+
+
+
+
+
+Stephen Rayner
+Is where anything else?
+
+No, that's all for now. If you have any further questions or would like to discuss anything in more detail, please feel free to reach out to me. It was a pleasure speaking with you and I'm excited to work with you to create a software solution that meets your needs.
+
+
+
+
+
+Stephen Rayner
+Likewise, what happens next?
+
+Next, we can schedule a discovery call to discuss your requirements and goals in more detail. During this call, we can review your technical requirements, business objectives, and any other relevant information to help us better understand your needs.
+
+After our discovery call, we can provide you with a proposal outlining our recommended approach, timelines, and pricing for the project. Once we have an agreement on the proposal, we can start the development work.
+
+During the development process, we will keep you updated on progress and milestones, and you will have the opportunity to provide feedback and make any necessary adjustments to the solution.
+
+Ultimately, our goal is to deliver a software solution that meets your needs and exceeds your expectations, and we will work closely with you throughout the process to ensure that this happens.
+
+
+
+
+
+Stephen Rayner
+Wasn't this our discovery call? What else do we need to discuss? I would like to get to the proposal quickly
+
+Yes, you're right, this was our discovery call, and we've covered most of the information that we need to move forward with the proposal. I apologize for any confusion, and I'm glad to hear that you're eager to move forward with the proposal.
+
+Based on our discussion, we have a good understanding of your requirements, and we will use this information to create a detailed proposal outlining our recommended approach, timelines, and pricing for the project. We'll aim to get the proposal to you as soon as possible, and we'll be available to answer any questions you may have.
+
+Thank you for your time today, and we're excited to work with you to create a software solution that meets your needs.

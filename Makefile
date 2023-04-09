@@ -16,7 +16,7 @@ BASH_ENV := ./hack/lib/logging.sh
 
 # Define variables
 SCRIPTS_DIR := scripts
-SCRIPTS := build
+SCRIPTS := run
 # Sets help as the default target
 default: help
 
@@ -29,7 +29,7 @@ help:
 	@echo ""
 	@echo "Targets:"
 	@echo " help Show this help message"
-	@echo " build: Build the application and its dependencies."
+	@echo " run: Build and Run the application and its dependencies."
 
 
 # Define individual script targets

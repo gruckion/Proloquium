@@ -9,6 +9,11 @@ python-dotenv = "==1.0.0"
 pinecone-client = "==2.2.1"
 pydantic = "==1.10.7"
 argparse= "==1.4.0"
+pytest = "*"
+pygments = "*"
+python-ctags3 = "*"
+langchain = "*"
+docker = "*"
 
 [dev-packages]
 pytest = "5.4.3"

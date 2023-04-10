@@ -1,97 +1,89 @@
-"""A simple command line application that runs a background process."""
+import functools
 
-import cmd
-import threading
-import time
+from langchain import LLMChain, PromptTemplate
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts.chat import ChatPromptTemplate, SystemMessagePromptTemplate
 
-from models.prompts import Prompt
+from common.config import settings
+from utils.code_executor import execute_python_file
+from utils.extract_code import extract_code
 
-# from models.prompts import Prompt
-from models.roles import Role
-from utils.openai_utils import openai_call
+random_prompt = PromptTemplate(
+    template="""
+Write the code for the first task.
 
-# from utils.openai_utils import openai_call
+```
 
+{task}
+```
 
-class BackgroundProcess(threading.Thread):
-    """A background process that runs for 10 seconds."""
+Declarative, Immutable, pythonic, design patterns, solid, and ensure 100% unit test coverage. Use the latest Python typing support.
+Include docstrings everywhere and a docstring for the file on line 1.
+Respond only with the files e.g.
 
-    def __init__(self, objective):
-        super().__init__()
-        self.objective = objective
-        self.status = "Not started"
-        self.done = False
+Example:
 
-    def run(self):
-        self.status = "In progress"
-        # Simulating a long-running process
-        time.sleep(10)
-        self.status = f"Completed: {self.objective}"
-        self.done = True
-
-
-def communicate(prompt: str):
-    """Communicate with the OpenAI API."""
-
-    loaded_prompt = Prompt.load_prompt(Role.PRODUCT_OWNER, prompt)
-    response = openai_call(loaded_prompt)
-    return response
+```filename.py
+# code here
+```
+    """,
+    input_variables=["task"],
+)
 
 
-class CommandLineApp(cmd.Cmd):
-    """A simple command line application that runs a background process."""
+# @functools.lru_cache(maxsize=None)
+def get_chains(chat, prompt_system):
+    """Get the chain of prompts for the chat
 
-    roles = list(Role.__members__)
-    responses = {}
+    Args:
+        chat (Chat): The chat model
+        prompt_system (PromptTemplate): The system prompt
 
-    intro = communicate("discovery_call")
+    Returns:
+        LLMChain: The chain of prompts
+    """
+    system_message = SystemMessagePromptTemplate(prompt=prompt_system)
+    chat_prompt = ChatPromptTemplate.from_messages([system_message])
+    ai_chain = LLMChain(llm=chat, prompt=chat_prompt)
+    return ai_chain
 
-    print(intro)
-    prompt = "> "
 
-    def __init__(self):
-        super().__init__()
-        self.bg_process = None
+def main() -> None:
+    """
+    Main function that takes a task input from the user and sends it to api_request function.
+    """
+    # task = input("Enter the task: ")
 
-    def do_start(self, objective):
-        """Start a background process for the given objective."""
-        if not self.bg_process or self.bg_process.done:
-            self.bg_process = BackgroundProcess(objective)
-            self.bg_process.start()
-            print(f"Started process for objective: {objective}")
-            self.process_objective(objective)
-        else:
-            print("Another process is already running")
+    task = """
+        Create Input and Output CSV Processors
+        Description: Develop a CSVProcessor class with methods to read input CSV, process it, and generate an output CSV. This class should follow the Single Responsibility Principle and be designed to handle only CSV processing tasks.
+    """
 
-    def do_update(self, _):
-        """Update the status of the background process."""
-        if self.bg_process:
-            print(f"Status: {self.bg_process.status}")
-        else:
-            print("No process running")
+    chat = ChatOpenAI(temperature=0.7, max_tokens=1000)
 
-    def do_exit(self, _):
-        """Exit the application."""
-        if self.bg_process and not self.bg_process.done:
-            print("Waiting for the background process to finish")
-            self.bg_process.join()
-        print("Exiting...")
-        return True
+    random_chain = get_chains(chat, random_prompt)
 
-    def process_objective(self, objective: str):
-        """Process the objective by passing it between roles."""
-        self.responses = {}
-        for role in self.roles:
-            print(f"{role} sees the objective: {objective}")
-            response = input(f"{role} response: ")
-            self.responses[role] = response
-            if role != self.roles[-1]:
-                print(f"Previous responses: {self.responses}")
-                input("Press Enter to continue")
-        print(f"Summary: {', '.join(self.responses.values())}")
+    random_run = random_chain.run(
+        task=task,
+    )
+
+    print(random_run)
+
+    save_python_file("random.py", extract_code(random_run))
+
+    execute_python_file("random.py")
+
+
+def save_python_file(file_name: str, code: str):
+    """Save python file to project folder
+
+    Args:
+        file_name (str): The name of the file
+        code (str): The code to save
+    """
+    with open(f"project/{file_name}", "w", encoding="utf-8") as file:
+        file.write(code)
 
 
 if __name__ == "__main__":
-    print("Starting the application")
-    app = CommandLineApp()
-    app.cmdloop()
+    main()

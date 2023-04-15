@@ -107,4 +107,10 @@ Declarative, Immutable, pythonic, design patterns, solid, and ensure 100% unit t
 
 - Have it work with existing projects
 - Have it work with multiple languages
-`
+
+
+Build in an improvement mechanism, which looks at the prompt and the output and the corrected output
+and then returns an improved prompt, using GPT.
+
+Need a way of having GPT summarise the tech stack, so it can consider the tech stack summary when writing code
+for existing projects.

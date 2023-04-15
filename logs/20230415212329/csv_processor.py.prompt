@@ -1,3 +1,6 @@
+[csv_processor.py]
+
+```python
 """This module contains a CSVProcessor class with methods to read input CSV, process it, and generate an output CSV."""
 
 import csv
@@ -48,3 +51,4 @@ class CSVProcessor:
         with open(file_path, mode='w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerows(csv_data)
+```

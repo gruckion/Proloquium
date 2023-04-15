@@ -1,0 +1,61 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.15, pytest-7.3.0, pluggy-1.0.0
+rootdir: /Users/sigex/workdir/proloquium
+collected 3 items
+
+logs/20230415211911/test_csv_processor.py EEE                            [100%]
+
+==================================== ERRORS ====================================
+_______________________ ERROR at setup of test_read_csv ________________________
+
+tmp_path = PosixPath('/private/var/folders/mv/dtw39jks6ml64s3pd1pnv_640000gn/T/pytest-of-sigex/pytest-11/test_read_csv0')
+
+    @pytest.fixture()
+    def csv_file(tmp_path):
+        data = [
+            {'name': 'John', 'age': 28},
+            {'name': 'Jane', 'age': 32},
+        ]
+        file_path = tmp_path / "test.csv"
+        with open(file_path, "w") as file:
+>           writer = csv.DictWriter(file, fieldnames=data[0].keys())
+E           NameError: name 'csv' is not defined
+
+logs/20230415211911/test_csv_processor.py:16: NameError
+__________________ ERROR at setup of test_write_csv_with_list __________________
+
+tmp_path = PosixPath('/private/var/folders/mv/dtw39jks6ml64s3pd1pnv_640000gn/T/pytest-of-sigex/pytest-11/test_write_csv_with_list0')
+
+    @pytest.fixture()
+    def csv_file(tmp_path):
+        data = [
+            {'name': 'John', 'age': 28},
+            {'name': 'Jane', 'age': 32},
+        ]
+        file_path = tmp_path / "test.csv"
+        with open(file_path, "w") as file:
+>           writer = csv.DictWriter(file, fieldnames=data[0].keys())
+E           NameError: name 'csv' is not defined
+
+logs/20230415211911/test_csv_processor.py:16: NameError
+__________________ ERROR at setup of test_write_csv_with_dict __________________
+
+tmp_path = PosixPath('/private/var/folders/mv/dtw39jks6ml64s3pd1pnv_640000gn/T/pytest-of-sigex/pytest-11/test_write_csv_with_dict0')
+
+    @pytest.fixture()
+    def csv_file(tmp_path):
+        data = [
+            {'name': 'John', 'age': 28},
+            {'name': 'Jane', 'age': 32},
+        ]
+        file_path = tmp_path / "test.csv"
+        with open(file_path, "w") as file:
+>           writer = csv.DictWriter(file, fieldnames=data[0].keys())
+E           NameError: name 'csv' is not defined
+
+logs/20230415211911/test_csv_processor.py:16: NameError
+=========================== short test summary info ============================
+ERROR logs/20230415211911/test_csv_processor.py::test_read_csv - NameError: n...
+ERROR logs/20230415211911/test_csv_processor.py::test_write_csv_with_list - N...
+ERROR logs/20230415211911/test_csv_processor.py::test_write_csv_with_dict - N...
+============================== 3 errors in 0.03s ===============================

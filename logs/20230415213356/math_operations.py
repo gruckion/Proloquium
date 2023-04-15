@@ -1,0 +1,42 @@
+"""
+This module contains functions to perform basic mathematical operations such as 
+addition, subtraction, multiplication, and division.
+
+Functions:
+    add_numbers: Returns the sum of two numbers.
+    subtract_numbers: Returns the difference between two numbers.
+    multiply_numbers: Returns the product of two numbers.
+    divide_numbers: Returns the quotient of two numbers.
+
+"""
+
+def add_numbers(num1: float, num2: float) -> float:
+    """Return the sum of two numbers."""
+    return num1 + num2
+
+def subtract_numbers(num1: float, num2: float) -> float:
+    """Return the difference between two numbers."""
+    return num1 - num2
+
+def multiply_numbers(num1: float, num2: float) -> float:
+    """Return the product of two numbers."""
+    return num1 * num2
+
+def divide_numbers(num1: float, num2: float) -> float:
+    """
+    Return the quotient of two numbers.
+    
+    Args:
+        num1 (float): The dividend.
+        num2 (float): The divisor.
+    
+    Returns:
+        float: The quotient of num1 divided by num2.
+    
+    Raises:
+        ZeroDivisionError: If num2 is zero.
+    
+    """
+    if num2 == 0:
+        raise ZeroDivisionError("Cannot divide by zero")
+    return num1 / num2

@@ -1,47 +1,18 @@
-import os
+import subprocess
+import sys
 
-import docker
 
-
-def pytest_executor(file: str, workspace_folder="project"):
-    """Execute a Python file in a Docker container
+def run_pytest(folder_path: str) -> str:
+    """Run pytest against the specified folder.
 
     Args:
-        file (str): The file to execute
+        folder_path (str): The folder path to run pytest against
 
     Returns:
-        str: The output of the execution
+        str: The output of the pytest run
     """
-
-    if not file.endswith(".py"):
-        return "Error: Invalid file type. Only .py files are allowed."
-
-    file_path = os.path.join(workspace_folder, file)
-
-    if not os.path.isfile(file_path):
-        return f"Error: File '{file}' does not exist."
-
     try:
-        client = docker.from_env()
-
-        container = client.containers.run(
-            "python:3.9.16-slim-bullseye",
-            f"pytest {file}",
-            volumes={
-                os.path.abspath(workspace_folder): {"bind": "/workspace", "mode": "ro"}
-            },
-            working_dir="/workspace",
-            stderr=True,
-            stdout=True,
-            detach=True,
-        )
-
-        output = container.wait()
-        print(f"output: {output}")
-        logs = container.logs().decode("utf-8")
-        container.remove()
-
-        return logs
-
-    except Exception as error:
-        return f"Error: {str(error)}"
+        result = subprocess.run([sys.executable, "-m", "pytest", folder_path], check=True, capture_output=True, text=True)
+        return result.stdout
+    except subprocess.CalledProcessError as error:
+        return error.output

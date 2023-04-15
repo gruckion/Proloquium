@@ -10,7 +10,7 @@ from common.config import settings
 from utils.code_executor import execute_python_file
 from utils.extract_code import extract_file_name_and_code
 from utils.file_reader import read_file_content
-from utils.pytest_exector import pytest_executor
+from utils.pytest_exector import run_pytest
 
 code_generator = PromptTemplate(
     template=read_file_content("../prompts/code_generator.txt"),
@@ -19,7 +19,7 @@ code_generator = PromptTemplate(
 
 unit_test_generator = PromptTemplate(
     template=read_file_content("../prompts/unit_test_generator.txt"),
-    input_variables=["code"],
+    input_variables=["file_name", "code"],
 )
 
 
@@ -47,10 +47,14 @@ def main() -> None:
     print("Welcome to the Code Generator!")
     # task = input("Enter the task: ")
 
+    # task = """
+    #     Create Input and Output CSV Processors
+    #     Description: Develop a CSVProcessor class with methods to read input CSV, process it, and generate an output CSV.
+    #     This class should follow the Single Responsibility Principle and be designed to handle only CSV processing tasks.
+    # """
+
     task = """
-        Create Input and Output CSV Processors
-        Description: Develop a CSVProcessor class with methods to read input CSV, process it, and generate an output CSV.
-        This class should follow the Single Responsibility Principle and be designed to handle only CSV processing tasks.
+        Create functions for add, subtract, divide and mupliply
     """
 
     chat = ChatOpenAI(temperature=0.7, max_tokens=1000)
@@ -76,6 +80,7 @@ def main() -> None:
     unit_test_generator_chain = get_chains(chat, unit_test_generator)
 
     unit_test_generator_run = unit_test_generator_chain.run(
+        file_name=file_name,
         code=code,
     )
 
@@ -88,7 +93,9 @@ def main() -> None:
 
     save_file(f"project/{file_name}", unit_test_generator_run)
 
-    pytest_executor(file_name)
+    test_result = run_pytest(f"logs/{timestamp}/")
+
+    save_file(f"logs/{timestamp}/result_{file_name}.txt", test_result)
 
 
 def save_file(file_name: str, code: str):

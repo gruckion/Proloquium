@@ -1,5 +1,3 @@
-[test_csv_processor.py]
-```python
 """This module contains unit tests for the CSVProcessor class."""
 
 import csv
@@ -7,7 +5,6 @@ from typing import List, Tuple
 from unittest.mock import mock_open, patch
 
 import pytest
-
 from csv_processor import CSVProcessor
 
 
@@ -67,4 +64,3 @@ def test_generate_output_csv(input_csv_data, tmp_path):
             [call(row) for row in input_csv_data],
             any_order=True,
         )
-```

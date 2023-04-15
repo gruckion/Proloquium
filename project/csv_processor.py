@@ -1,0 +1,39 @@
+"""This module contains CSVProcessor class with methods to read input CSV, process it, and generate an output CSV."""
+
+from typing import List, Dict
+import csv
+
+
+class CSVProcessor:
+    """A class to read input CSV, process it, and generate an output CSV."""
+
+    @staticmethod
+    def read_csv(file_path: str) -> List[Dict[str, str]]:
+        """
+        Read CSV file and return list of dictionaries.
+
+        :param file_path: path of input csv file
+        :type file_path: str
+        :return: list of dictionaries where keys are header values and values are row values
+        :rtype: List[Dict[str, str]]
+        """
+        with open(file_path, "r") as file:
+            csv_reader = csv.DictReader(file)
+            return [row for row in csv_reader]
+
+    @staticmethod
+    def write_csv(file_path: str, data: List[Dict[str, str]], fieldnames: List[str]):
+        """
+        Write data to output CSV file.
+
+        :param file_path: path of output csv file
+        :type file_path: str
+        :param data: list of dictionaries where keys are header values and values are row values
+        :type data: List[Dict[str, str]]
+        :param fieldnames: list of header values
+        :type fieldnames: List[str]
+        """
+        with open(file_path, "w", newline="") as file:
+            csv_writer = csv.DictWriter(file, fieldnames=fieldnames)
+            csv_writer.writeheader()
+            csv_writer.writerows(data)

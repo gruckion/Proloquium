@@ -1,0 +1,30 @@
+Write the pytest unit tests for the task.
+
+```
+{code}
+```
+
+Critical requirements:
+
+1. The code must be declarative, Immutable and pythonic
+2. Follow design patterns
+3. Ensure 100% unit test coverage.
+4. Use the latest Python typing support.
+5. Include docstrings everywhere and a docstring for the file on line 1.
+6. Ensure Python types are used everywhere.
+
+Must respond only with exactly the following:
+
+1. [file_name_as_snake_case.py] must be prefixed with test_
+2. 3 backticks
+3. insert the code
+4. 3 backticks
+
+Example:
+
+[test_filename.py]
+```python
+"""[insert module docstring]"""
+
+# code here
+```

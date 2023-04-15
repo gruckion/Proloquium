@@ -77,6 +77,7 @@ Client > objective
 
 - Save function
 - Save test
+- Lint the code
 - Run code check it compiles
 - Run test check it passes
 - Repeat

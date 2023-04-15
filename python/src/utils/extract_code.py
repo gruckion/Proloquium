@@ -8,22 +8,26 @@ the contents within it.
 """
 
 import re
-from typing import Optional
+from typing import Optional, Tuple
 
 
-def extract_code(text: str) -> Optional[str]:
-    """
-    Extract a code block enclosed by triple backticks from the given text.
+def extract_file_name_and_code(text: str) -> Optional[Tuple[str, str]]:
+    """Extract a file name and code block from the given text.
 
     Args:
-        text (str): The text containing the code block.
+        text (str): The text containing the file name and code block.
 
     Returns:
-        Optional[str]: The extracted code block or None if no code block is found.
+        Optional[Tuple[str, str]]: A tuple containing the file name and code block or None if no file name
     """
+    file_name_pattern = re.compile(r"\[(.+)\]")
     code_block_pattern = re.compile(r"```(?:python)?\s*\n(.*?)\n```", re.DOTALL)
-    match = code_block_pattern.search(text)
 
-    if match:
-        return match.group(1).strip()
+    file_name_match = file_name_pattern.search(text)
+    code_block_match = code_block_pattern.search(text)
+
+    if file_name_match and code_block_match:
+        file_name = file_name_match.group(1)
+        code_block = code_block_match.group(1).strip()
+        return (file_name, code_block)
     return None

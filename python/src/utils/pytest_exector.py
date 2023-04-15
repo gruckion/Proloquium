@@ -3,7 +3,7 @@ import os
 import docker
 
 
-def execute_python_file(file: str, workspace_folder="project"):
+def pytest_executor(file: str, workspace_folder="project"):
     """Execute a Python file in a Docker container
 
     Args:
@@ -26,7 +26,7 @@ def execute_python_file(file: str, workspace_folder="project"):
 
         container = client.containers.run(
             "python:3.9.16-slim-bullseye",
-            f"python {file}",
+            f"pytest {file}",
             volumes={
                 os.path.abspath(workspace_folder): {"bind": "/workspace", "mode": "ro"}
             },

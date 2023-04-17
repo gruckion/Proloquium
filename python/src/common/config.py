@@ -17,6 +17,8 @@ class EnvironmentVariables:
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
     PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
     TABLE_NAME = os.getenv("TABLE_NAME")
+    SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY")
+
     OBJECTIVE = os.getenv("OBJECTIVE")
     INITIAL_TASK = os.getenv("INITIAL_TASK")
 

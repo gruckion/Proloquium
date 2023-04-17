@@ -1,119 +1,76 @@
-import functools
-import os
-from datetime import datetime
+from langchain.agents import initialize_agent, load_tools
+from langchain.llms import OpenAI
 
-from langchain import LLMChain, PromptTemplate
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts.chat import ChatPromptTemplate, SystemMessagePromptTemplate
+llm = OpenAI(temperature=0)
 
-from common.config import settings
-from utils.code_executor import execute_python_file
-from utils.extract_code import extract_file_name_and_code
-from utils.file_reader import read_file_content
-from utils.pytest_exector import run_pytest
 
-code_generator = PromptTemplate(
-    template=read_file_content("../prompts/code_generator.txt"),
-    input_variables=["task"],
+tools = load_tools([
+    "serpapi",
+    "llm-math",
+    "wikipedia",
+    "terminal",
+    "python_repl",
+    # "wolfram-alpha", WOLFRAM_ALPHA_APPID
+    "requests",
+    "pal-math",
+    "pal-colored-objects",
+    "open-meteo-api",
+    # "news-api", news_api_key
+    # "tmdb-api", tmdb_bearer_token
+    # "google-search", GOOGLE_API_KEY
+    # "searx-search", SEARX_HOST
+    # "google-serper", SERPER_API_KEY
+    # "podcast-api", listen_api_key
+    # "openweathermap-api", doesn't exist?
+], llm=llm)
+
+
+agent = initialize_agent(
+    tools,
+    llm,
+    agent="zero-shot-react-description",
+    verbose=True
 )
 
-unit_test_generator = PromptTemplate(
-    template=read_file_content("../prompts/unit_test_generator.txt"),
-    input_variables=["file_name", "code"],
-)
+# Wolfram Alpha: A wrapper around Wolfram Alpha. Useful for when you need to answer questions about math, science, and other subjects. Input should be a search query.
+# News API: A wrapper around the News API. Useful for when you need to answer questions about news. Input should be a search query.
+# TMDB API: A wrapper around the TMDB API. Useful for when you need to answer questions about movies. Input should be a search query.
+# Google Search: A wrapper around the Google Search API. Useful for when you need to answer questions about current events. Input should be a search query.
+# Searx Search: A wrapper around the Searx Search API. Useful for when you need to answer questions about current events. Input should be a search query.
+# Google Serper: A wrapper around the Google Serper API. Useful for when you need to answer questions about current events. Input should be a search query.
+# Podcast API: A wrapper around the Podcast API. Useful for when you need to answer questions about podcasts. Input should be a search query.
+# OpenWeatherMap API: A wrapper around the OpenWeatherMap API. Useful for when you need to answer questions about weather. Input should be a search query.
 
 
-# @functools.lru_cache(maxsize=None)
-def get_chains(chat, prompt):
-    """Get the chain of prompts for the chat
+agent.agent.llm_chain.prompt.template = """
+Answer the following questions as best you can. You have access to the following tools:
 
-    Args:
-        chat (Chat): The chat model
-        prompt (PromptTemplate): The system prompt
+Terminal: Executes commands in a terminal. Input should be valid commands, and the output will be any output from running that command. Might need to install the program using brew if it is not available.
+Requests: A wrapper around the Requests library. Useful for when you need to answer questions about HTTP requests. Input should be valid Python code, and the output will be any output from running that code.
+Python REPL: A Python REPL. Useful for when you need to answer questions about Python. Input should be valid Python code, and the output will be any output from running that code.
+Calculator: Useful for when you need to answer questions about math.
+Wikipedia: A wrapper around Wikipedia. Useful for when you need to answer general questions about people, places, companies, historical events, or other subjects. Input should be a search query.
+Search: A search engine. Useful for when you need to answer questions about current events. Input should be a search query.
+PAL Math: A wrapper around PAL Math. Useful for when you need to answer questions about math. Input should be a search query.
+PAL Colored Objects: A wrapper around PAL Colored Objects. Useful for when you need to answer questions about colors. Input should be a search query.
+Open Meteo API: A wrapper around the Open Meteo API. Useful for when you need to answer questions about weather. Input should be a search query.
 
-    Returns:
-        LLMChain: The chain of prompts
-    """
-    system_message = SystemMessagePromptTemplate(prompt=prompt)
-    chat_prompt = ChatPromptTemplate.from_messages([system_message])
-    ai_chain = LLMChain(llm=chat, prompt=chat_prompt)
-    return ai_chain
+Use the following format:
 
+Question: the input question you must answer
 
-def main() -> None:
-    """
-    Main function that takes a task input from the user and sends it to api_request function.
-    """
-    print("Welcome to the Code Generator!")
-    # task = input("Enter the task: ")
+Thought: you should always think about what to do
+Action: the action to take, should be one of [Terminal, Requests, Python REPL, Calculator, Wikipedia, Search, PAL Math, PAL Colored Objects, Open Meteo API]
+Action Input: the input to the action
+Observation: the result of the action
+... (this Thought/Action/Action Input/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question
 
-    # task = """
-    #     Create Input and Output CSV Processors
-    #     Description: Develop a CSVProcessor class with methods to read input CSV, process it, and generate an output CSV.
-    #     This class should follow the Single Responsibility Principle and be designed to handle only CSV processing tasks.
-    # """
+Begin!
 
-    task = """
-        Create functions for add, subtract, divide and mupliply
-    """
+Question: {input}
+Thought:{agent_scratchpad}
+"""
 
-    chat = ChatOpenAI(temperature=0.7, max_tokens=1000)
-
-    code_generator_chain = get_chains(chat, code_generator)
-
-    code_generator_run = code_generator_chain.run(
-        task=task,
-    )
-
-    print(f"Generated response: {code_generator_run}")
-
-    file_name, code = extract_file_name_and_code(code_generator_run)
-
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    save_file(f"logs/{timestamp}/{file_name}.prompt", code_generator_run)
-    save_file(f"logs/{timestamp}/{file_name}", code)
-
-    save_file(f"project/{file_name}", code)
-
-    execute_python_file(file_name)
-
-    unit_test_generator_chain = get_chains(chat, unit_test_generator)
-
-    unit_test_generator_run = unit_test_generator_chain.run(
-        file_name=file_name,
-        code=code,
-    )
-
-    print(f"Generated response: {unit_test_generator_run}")
-
-    file_name, code = extract_file_name_and_code(unit_test_generator_run)
-
-    save_file(f"logs/{timestamp}/{file_name}.prompt", unit_test_generator_run)
-    save_file(f"logs/{timestamp}/{file_name}", code)
-
-    save_file(f"project/{file_name}", unit_test_generator_run)
-
-    test_result = run_pytest(f"logs/{timestamp}/")
-
-    save_file(f"logs/{timestamp}/result_{file_name}.txt", test_result)
-
-
-def save_file(file_name: str, code: str):
-    """Save python file to project folder
-
-    Args:
-        file_name (str): The name of the file
-        code (str): The code to save
-    """
-    print(f"Saving {file_name} to project folder")
-
-    directory = os.path.dirname(file_name)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-    with open(file_name, "w", encoding="utf-8") as file:
-        file.write(code)
-
-
-if __name__ == "__main__":
-    main()
+agent.run("What city am I in right now?")

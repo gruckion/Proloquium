@@ -1,5 +1,14 @@
 # List of tasks to complete
 
+## TODO
+
+- [ ] LanChain has an [OutputParser](https://docs.langchain.com/docs/components/chains/llm-chain)
+- [ ] Use [LangChain indexes](https://docs.langchain.com/docs/components/chains/index_related_chains) for the projects code / meta data
+  - [ ] StuffDocumentsChain
+  - [ ] MapReduceDocumentsChain
+  - [ ] Refine
+  - [ ] Map-Rerank
+
 ## Research
 
 - [x] Create a new project in Pinecone
@@ -9,6 +18,10 @@
 - [ ] Look at AutoGPT's update to allow it to write its own code and run scripts allows it to recursively develop
 - [ ] RobotGPT has voice
 - [ ] This product looks like a finished product https://www.imagica.ai/ but is waiting list
+- [ ] Find a way to find and crawl documentation needed to write code
+- [ ] Maybe a pseudo code to code converter which is more compact for GPT to work with
+- [ ] Maybe obfuscate the code and provide that compressed code too and do lookups via indexes
+- [ ] Produce a vector map of the code base and how it relates to each other and external libraries
 
 ## Application
 

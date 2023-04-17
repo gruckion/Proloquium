@@ -1,4 +1,8 @@
 # Proloquium
+[![Unit Tests](https://img.shields.io/github/actions/workflow/status/gruckion/Proloquium/ci.yml?label=unit%20tests)](https://github.com/gruckion/Proloquium/actions/workflows/ci.yml)
+[![Discord Follow](https://dcbadge.vercel.app/api/server/hkMUKh3puU?style=flat)](https://discord.gg/hkMUKh3puU)
+[![GitHub Repo stars](https://img.shields.io/github/stars/gruckion/Proloquium?style=social)](https://github.com/gruckion/Proloquium/stargazers)
+
 
 ## What is it?
 

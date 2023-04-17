@@ -2,17 +2,28 @@
 
 ## What is it?
 
-Proloquium is an Artificial General Intelligence (AGI) system that leverages the power of Large Language Models (LLMs), LangChain, and Pinecone. Proloquium is a conversational AI system that uses Pinecone and LangChain to provide a conversational experience for end users who known little to nothing about the software development lifecycle to build high quality software that follows best practices with a focus on design patterns, scalability, testability, maintainability, security, performance, high availability. The end result form Proloquium is a software development plan that is generated from the conversation with the end user. This is then turned into a working prototype that can be continuously improved upon by the end user through conversation with Proloquium.
+Proloquium is an Artificial General Intelligence (AGI) system that leverages the power of Large Language Models (LLMs), LangChain, and Pinecone.
 
-## How to use it?
+Proloquium is a conversational AI system that uses Pinecone and LangChain to provide a conversational experience for end users to accomplish tasks that traditionally require an entire team each carrying out specialist roles. Proloquium uses a rolling episodic memory organiser for each agent to consolidate memories as embeddings in a hiearchical structure which is refined through reprocessing of previous tasks and is measured against both the previous and current identified objective and testing criteria.
 
-In Proloquium you are the executive sponsor or customer you will interact with the **Project Manager**, **Project Owner** and **Lead Engineer** to define the project scope, timeline, and budget. You will also be responsible for providing the resources needed to complete the project.
+Proloquium has 3 main abilities;
+1. Autonomously creates software: follows the software development lifecycle with agile planning, code reviews, and retrospectives to allow the AI agents and end user to build applications at enterprise quality software that follows best practices with a focus on design patterns, scalability, testability, maintainability, security, performance, high availability.
+2. Autonomously creates tools: identifies its limitations and tools it is lacking, then plans, builds and then uses the tools to meet objective at hand. Proloquium will continue to add tools to its self updating its own code base in the process.
+3. Autonomously agent creation: identifies gaps in specialist knowledge required, produces agents with those skill sets which it can then utilitse to accomplish the task at hand.
+
+The end result from Proloquium is a conversational AI that is capable of building tools and agents to accomplish tasks for the end user and for its own internal AI agents.
+
+## Who am I?
+
+In Proloquium you are the executive sponsor or client you will interact with the **Project Manager**, **Project Owner** and **Application Lead** to define the project scope, timeline, and budget. You will also be responsible for providing the resources needed to complete the project.
 
 - **YOU Executive Sponsor**: Provides overall project vision, support, and financial resources.
 
 ## Proloquium Agents
 
-Proloquium has multiple agents that are responsible for different tasks. The agents are:
+Proloquium has multiple agents that are responsible for different tasks. As well as being able to autonomously identify and create new agents to delegate specialist tasks too;
+
+### Product Development
 
 - **Project Manager**: Oversees the project's progress, timeline, and resource allocation.
 - **Product Owner**: Represents the customer and defines product features and priorities.
@@ -23,12 +34,39 @@ Proloquium has multiple agents that are responsible for different tasks. The age
 - **Mobile Developer**: Specializes in developing applications for mobile platforms, such as iOS and Android.
 - **Quality Assurance (QA) Engineer**: Tests the software for bugs, usability, and performance issues.
 - **DevOps Engineer**: Streamlines development and deployment processes to improve efficiency and reliability.
-- **UI/UX Designer**: Designs user interfaces and ensures a positive user experience.
+- **UX/UI Designer**: Designs user interfaces and ensures a positive user experience.
 - **Technical Writer**: Creates documentation and user guides for the software.
 - **Data Scientist/Engineer**: Analyzes and processes data, creating insights and developing machine learning models.
 - **Security Engineer**: Ensures the software and infrastructure are secure from vulnerabilities and attacks.
 - **Business Analyst**: Analyzes business requirements and translates them into technical specifications.
 - **Scrum Master/Agile Coach**: Facilitates Agile development processes and helps the team improve their practices.
+
+### Executive Functions
+
+- **CEO (Chief Executive Officer)**: Sets the company's vision, strategy, and overall direction.
+- **CFO (Chief Financial Officer)**: Manages the company's financial resources and ensures fiscal health.
+- **COO (Chief Operating Officer)**: Oversees day-to-day operations and ensures efficient processes.
+- **CMO (Chief Marketing Officer)**: Leads marketing efforts and drives brand growth and awareness.
+- **HR Manager (Human Resources Manager)**: Manages employee recruitment, retention, and development.
+- **Sales Manager**: Leads the sales team and drives revenue growth.
+- **Customer Support Representative**: Assists customers with inquiries and resolves issues.
+- **Legal Counsel**: Provides legal advice and ensures compliance with laws and regulations.
+- **Supply Chain Manager**: Manages procurement, logistics, and inventory to optimize operations.
+- **IT Manager**: Oversees information technology infrastructure and support.
+
+### Data Stratergy
+
+- **Chief Data Officer (CDO)**: Sets the data strategy and ensures data quality and accessibility.
+- **Data Analyst**: Examines data sets to identify trends and draw insights.
+- **Data Engineer**: Builds and maintains data pipelines and infrastructure.
+- **Data Architect**: Designs data models and structures to support analysis and processing.
+- **Database Administrator**: Manages and optimizes database performance and security.
+- **Data Visualization Specialist**: Creates visual representations of data to communicate insights.
+- **Data Governance Manager**: Ensures data is managed according to policies and regulations.
+- **Machine Learning Engineer**: Develops machine learning models and integrates them into applications.
+- **AI Researcher**: Conducts research on artificial intelligence methods and technologies.
+- **Big Data Specialist**: Works with large-scale data sets and develops strategies for processing and storage.
+
 
 ## Architecture
 
@@ -45,6 +83,9 @@ The Proloquium architecture is comprised of three main components:
 - Make (Optional)
 - Pipenv 2021.5.29+
 - OpenAI GPT-3 or GPT-4 API Key
+- Pinecone API key
+- Serp API key
+- Wolfram Alpha API key
 
 ## Running the Project
 
@@ -55,6 +96,6 @@ The Proloquium architecture is comprised of three main components:
 4. Alternatively, use Docker Compose to build and run the application:
    - Build and run the application: `./scripts/run.sh`
 5. To run the application locally with Pipenv, ensure Pipenv is installed and active:
-   - Install dependencies: `pipenv install`
+   - Install dependencies: `cd python; pipenv install --dev`
    - Activate virtual environment: `pipenv shell`
    - Run the main.py script: `python main.py`

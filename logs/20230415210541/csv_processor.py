@@ -1,0 +1,59 @@
+"""A module for processing CSV files"""
+
+from typing import List, Tuple
+import csv
+
+
+class CSVProcessor:
+    """A class for processing CSV files"""
+
+    @staticmethod
+    def read_csv(file_path: str) -> List[Tuple[str]]:
+        """
+        Read a CSV file at the given path and return its contents as a list of tuples.
+
+        Args:
+            file_path: The path to the CSV file.
+
+        Returns:
+            A list of tuples representing each row in the CSV file.
+        """
+        rows = []
+        with open(file_path, "r") as csvfile:
+            csvreader = csv.reader(csvfile)
+            for row in csvreader:
+                rows.append(tuple(row))
+        return rows
+
+    @staticmethod
+    def write_csv(file_path: str, rows: List[Tuple[str]]) -> None:
+        """
+        Write a list of tuples to a CSV file at the given path.
+
+        Args:
+            file_path: The path to the CSV file.
+            rows: A list of tuples to write to the CSV file.
+
+        Returns:
+            None.
+        """
+        with open(file_path, "w") as csvfile:
+            csvwriter = csv.writer(csvfile)
+            for row in rows:
+                csvwriter.writerow(row)
+
+    @staticmethod
+    def process_csv(file_path: str) -> List[Tuple[str]]:
+        """
+        Read a CSV file at the given path, process its contents, and return the processed contents as a list of tuples.
+
+        Args:
+            file_path: The path to the CSV file.
+
+        Returns:
+            A list of tuples representing the processed contents of the CSV file.
+        """
+        rows = CSVProcessor.read_csv(file_path)
+        # Process the rows here
+        processed_rows = rows
+        return processed_rows

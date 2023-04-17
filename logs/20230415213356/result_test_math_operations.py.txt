@@ -1,0 +1,8 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.15, pytest-7.3.0, pluggy-1.0.0
+rootdir: /Users/sigex/workdir/proloquium
+collected 13 items
+
+logs/20230415213356/test_math_operations.py .............                [100%]
+
+============================== 13 passed in 0.01s ==============================

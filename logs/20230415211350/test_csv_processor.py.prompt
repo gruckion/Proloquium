@@ -1,0 +1,62 @@
+[test_csv_processor.py]
+```python
+"""
+Unit tests for CSVProcessor class
+"""
+
+import csv
+from typing import List, Dict
+from unittest.mock import Mock, mock_open, patch
+
+import pytest
+
+from csv_processor import CSVProcessor
+
+
+@pytest.fixture
+def csv_processor():
+    return CSVProcessor('input.csv', 'output.csv')
+
+
+@pytest.fixture
+def input_csv_data():
+    return [
+        {'name': 'John', 'age': '25', 'gender': 'male'},
+        {'name': 'Jane', 'age': '30', 'gender': 'female'},
+        {'name': 'Bob', 'age': '40', 'gender': 'male'}
+    ]
+
+
+@pytest.fixture
+def output_csv_data():
+    return [
+        {'name': 'John', 'age': '25', 'gender': 'male', 'status': 'active'},
+        {'name': 'Jane', 'age': '30', 'gender': 'female', 'status': 'inactive'},
+        {'name': 'Bob', 'age': '40', 'gender': 'male', 'status': 'active'}
+    ]
+
+
+def test_csv_processor_init(csv_processor):
+    assert csv_processor.input_file == 'input.csv'
+    assert csv_processor.output_file == 'output.csv'
+
+
+@patch('csv_processor.open', new_callable=mock_open)
+def test_read_input_csv(mock_file, csv_processor, input_csv_data):
+    mock_file.return_value.__enter__.return_value = Mock(spec=csv.reader)
+    csv.reader.return_value = [['name', 'age', 'gender'], ['John', '25', 'male'], ['Jane', '30', 'female'], ['Bob', '40', 'male']]
+    assert csv_processor.read_input_csv() == input_csv_data
+
+
+def test_process_csv(csv_processor, input_csv_data, output_csv_data):
+    assert csv_processor.process_csv(input_csv_data) == output_csv_data
+
+
+@patch('csv_processor.open', new_callable=mock_open)
+def test_write_output_csv(mock_file, csv_processor, output_csv_data):
+    mock_file.return_value.__enter__.return_value = Mock(spec=csv.writer)
+    csv_writer = csv.writer.return_value
+    csv_processor.write_output_csv(output_csv_data)
+    csv_writer.writeheader.assert_called()
+    csv_writer.writerows.assert_called_with(output_csv_data)
+```

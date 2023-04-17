@@ -1,0 +1,1080 @@
+{
+  ".DS_Store": 10244,
+  ".editorconfig": 687,
+  ".env.secret": 121,
+  ".env.secret.example": 29,
+  ".flake8": 375,
+  ".gitignore": 363,
+  "Makefile": 3124,
+  "README.md": 1714,
+  "data": {
+    ".DS_Store": 6148,
+    "pdf": {
+      ".DS_Store": 8196,
+      "contracts": {
+        "AuditPage.pdf": 180177,
+        "Avanti_Gas.pdf": 281466,
+        "BG_Core_Electric.pdf": 6764770,
+        "BG_Lite_Electric.pdf": 1326719,
+        "BG_Lite_Gas.pdf": 94048,
+        "BG_Plus_Electric.pdf": 466226,
+        "CNG_Gas.pdf": 81778,
+        "Corona_Electric.pdf": 1635648,
+        "Corona_Gas.pdf": 68235,
+        "EDF_Electric.pdf": 1247118,
+        "Engie_Electric.pdf": 399619,
+        "Engie_Gas.pdf": 47385,
+        "Gazprom_Electricity.pdf": 5085669,
+        "Gazprom_Gas.pdf": 78892,
+        "National_Gas.pdf": 209142,
+        "Opus_Electric.pdf": 4161051,
+        "Opus_Gas.pdf": 922670,
+        "SSE_Elec.pdf": 2943273,
+        "SSE_Gas.pdf": 319649,
+        "Scottish_Power_Electric.pdf": 2690113,
+        "Scottish_Power_Gas.pdf": 132805,
+        "Smartest.pdf": 2872460,
+        "Total_Electricity.pdf": 3048060,
+        "Total_Gas.pdf": 365415,
+        "Valda.pdf": 252747,
+        "YGP.pdf": 323439,
+        "YU.pdf": 132672,
+        "loa_template.pdf": 648391
+      }
+    }
+  },
+  "docker-compose.local.yml": 664,
+  "docker-compose.test.yml": 1703,
+  "docker-compose.yml": 3216,
+  "docs": {
+    "coding_standards.md": 408,
+    "deployments.md": 785,
+    "requirements_and_setup.md": 2107,
+    "setting_up_new_env.md": 2101,
+    "teardown.md": 668,
+    "tips_and_troubleshooting.md": 307,
+    "tools.md": 2349
+  },
+  "lambda": {
+    ".DS_Store": 6148,
+    ".eslintignore": 144,
+    ".eslintrc.json": 1394,
+    ".gitattributes": 160,
+    ".gitconfig": 26,
+    ".gitignore": 757,
+    ".nvmrc": 12,
+    ".pnp.cjs": 969606,
+    ".pnp.loader.mjs": 9367,
+    ".prettierignore": 188,
+    ".prettierrc.json": 86,
+    ".yarnrc.yml": 356,
+    "README.md": 1283,
+    "lambdas": {
+      ".DS_Store": 6148,
+      "companies-house": {
+        ".DS_Store": 6148,
+        ".env": 103,
+        ".env.local": 103,
+        "README.md": 490,
+        "package.json": 1031,
+        "serverless.ts": 624,
+        "src": {
+          "config": {},
+          "functions": {
+            "company-lookup": {
+              "companieshouse-constants.ts": 86060,
+              "handler.ts": 1916,
+              "index.ts": 229,
+              "types.ts": 1794
+            },
+            "events": {
+              "sample_company_lookup.json": 35
+            },
+            "index.ts": 62
+          }
+        },
+        "tsconfig.json": 362,
+        "webpack.config.ts": 172
+      },
+      "contract-pdf-generator": {
+        ".DS_Store": 6148,
+        ".env": 716,
+        ".env.local": 484,
+        "README.md": 2392,
+        "lib": {
+          "tsconfig.tsbuildinfo": 157430
+        },
+        "package.json": 1233,
+        "scripts": {
+          "template-tester.ts": 2763
+        },
+        "serverless.ts": 1289,
+        "src": {
+          "constants": {
+            "environment.ts": 823
+          },
+          "fonts": {
+            "BrushScriptStd.otf": 35148
+          },
+          "functions": {
+            "create-pdf": {
+              "handler.ts": 2850,
+              "index.ts": 768,
+              "loadTemplate.ts": 1598
+            },
+            "events": {
+              "sample_create_pdf.json": 1414
+            },
+            "index.ts": 54,
+            "sign-contract": {
+              "handler.ts": 2457,
+              "index.ts": 783
+            }
+          }
+        },
+        "tsconfig.json": 362,
+        "webpack.config.ts": 636
+      },
+      "data-8": {
+        ".DS_Store": 6148,
+        ".env": 301,
+        ".env.local": 109,
+        "README.md": 465,
+        "lib": {
+          "src": {
+            "functions": {
+              "bank-account-validation": {}
+            }
+          },
+          "tsconfig.tsbuildinfo": 118199
+        },
+        "package.json": 1064,
+        "serverless.ts": 755,
+        "src": {
+          "constants": {
+            "environment.ts": 319
+          },
+          "functions": {
+            "bank-account-validation": {
+              "handler.ts": 1105,
+              "index.ts": 549,
+              "types.ts": 2494
+            },
+            "events": {
+              "sample_bank_account_validation.json": 58
+            },
+            "index.ts": 80
+          },
+          "services": {
+            "bankAccountValidation.ts": 1899
+          }
+        },
+        "tsconfig.json": 362,
+        "webpack.config.ts": 172
+      },
+      "experian": {
+        ".env": 270,
+        ".env.local": 109,
+        "README.md": 453,
+        "lib": {
+          "tsconfig.tsbuildinfo": 122882
+        },
+        "package.json": 1068,
+        "serverless.ts": 775,
+        "src": {
+          "constants": {
+            "environment.ts": 337
+          },
+          "functions": {
+            "commercial-delphi-score": {
+              "handler.ts": 1304,
+              "index.ts": 555,
+              "services": {
+                "experian.ts": 3305
+              },
+              "types.ts": 1224
+            },
+            "events": {
+              "sample_commercial_delphi_score.json": 54
+            },
+            "index.ts": 80
+          }
+        },
+        "tsconfig.json": 362,
+        "webpack.config.ts": 172
+      },
+      "messaging": {
+        ".DS_Store": 8196,
+        ".env": 631,
+        ".env.local": 237,
+        ".gitignore": 68,
+        "README.md": 900,
+        "out": {
+          ".DS_Store": 6148,
+          ".gitkeep": 0
+        },
+        "package.json": 1281,
+        "serverless.ts": 1112,
+        "src": {
+          "constants": {
+            "environment.ts": 505
+          },
+          "functions": {
+            "index.ts": 43,
+            "send-email": {
+              "handler.ts": 4634,
+              "index.ts": 675,
+              "mock_current_supplier_information_email.json": 447,
+              "mock_quote_complete.json": 2283,
+              "mock_quote_complete_customer.json": 720,
+              "mock_quote_failure.json": 2289,
+              "mock_quote_signup_email.json": 572,
+              "mock_rejoin_existing_fuzzy_matched_company.json": 343,
+              "mock_resend_verification.json": 176,
+              "mock_send_verification.json": 174,
+              "mock_sign_contract_email.json": 613,
+              "s3": {
+                "log-payload.ts": 1391
+              },
+              "scripts": {},
+              "types.ts": 992
+            }
+          },
+          "services": {
+            "createEmlFile.ts": 2307,
+            "downloadAttachment.ts": 274,
+            "templator.ts": 5156
+          },
+          "templates": {
+            ".DS_Store": 8196,
+            "layout": {
+              "footer.hbs": 5169,
+              "index.hbs": 3635
+            },
+            "partials": {
+              "current_supplier_information.hbs": 3229,
+              "quote_complete.hbs": 21577,
+              "quote_complete_customer.hbs": 2719,
+              "quote_failure.hbs": 12156,
+              "quote_signup.hbs": 4333,
+              "resend_verification.hbs": 1235,
+              "send_rejoin_existing_fuzzy_matched_company.hbs": 1517,
+              "send_verification.hbs": 1231,
+              "sign_contract.hbs": 4423
+            }
+          }
+        },
+        "tsconfig.json": 373,
+        "webpack.config.ts": 644
+      },
+      "notify-scheduler": {
+        ".DS_Store": 6148,
+        ".env": 473,
+        ".env.local": 109,
+        ".gitignore": 63,
+        "README.md": 499,
+        "package.json": 1187,
+        "serverless.ts": 1029,
+        "src": {
+          "constants": {
+            "environment.ts": 308
+          },
+          "functions": {
+            "index.ts": 100,
+            "start-reminder": {
+              "handler.ts": 1107,
+              "index.ts": 569,
+              "mock_start_reminder.json": 651,
+              "types.ts": 219
+            },
+            "stop-reminder": {
+              "handler.ts": 973,
+              "index.ts": 766,
+              "mock_stop_reminder.json": 98,
+              "types.ts": 93
+            }
+          },
+          "services": {
+            "reminderScheduler.ts": 2677
+          }
+        },
+        "tsconfig.json": 403,
+        "webpack.config.ts": 172
+      }
+    },
+    "package.json": 2536,
+    "packages": {
+      ".DS_Store": 6148,
+      "common": {
+        "index.ts": 23,
+        "package.json": 709,
+        "src": {
+          "config": {
+            "env-config.ts": 2207,
+            "serverless-template.ts": 1034,
+            "serverlessConfigurationBuilder.ts": 4646
+          },
+          "index.ts": 386,
+          "libs": {
+            "apiGateway.ts": 488,
+            "handlerResolver.ts": 283,
+            "lambda.ts": 339,
+            "s3client.ts": 3236,
+            "secret-retrival.ts": 2004,
+            "sendGridClient.ts": 2859,
+            "sfnClient.ts": 2071
+          },
+          "types": {
+            "reminder-email.ts": 792
+          }
+        },
+        "tsconfig.json": 151
+      },
+      "pdf": {
+        ".DS_Store": 6148,
+        "README.md": 11371,
+        "data": {
+          "audit_template": {
+            "index.ts": 1815
+          },
+          "electric_template": {
+            "banking.ts": 684,
+            "base.ts": 1519,
+            "company.ts": 966,
+            "contact.ts": 675,
+            "contract.ts": 2041,
+            "index.ts": 830,
+            "misc.ts": 419,
+            "mpan.ts": 1027,
+            "sole-trader.ts": 1454,
+            "tpi.ts": 347
+          },
+          "fonts": {
+            "BrushScriptStd.otf": 35148
+          },
+          "loa_template": {
+            "index.ts": 128,
+            "loa-template.ts": 1861
+          },
+          "mutations": {
+            "address.ts": 809,
+            "businessNumber.ts": 938,
+            "checkbox.ts": 1251,
+            "date.ts": 1254,
+            "numeric.ts": 3614,
+            "string.ts": 317
+          },
+          "test_data.json": 3171
+        },
+        "index.ts": 23,
+        "out": {
+          "BG_Core_Electric_filled.pdf": 7078640,
+          "BG_Lite_Electric_filled.pdf": 1524130,
+          "BG_Plus_Electric_filled.pdf": 689016,
+          "Corona_Electric_filled.pdf": 1840469,
+          "EDF_Electric_filled.pdf": 1391198,
+          "Engie_Electric_filled.pdf": 651093,
+          "Opus_Electric_filled.pdf": 4189511,
+          "SSE_Elec_filled.pdf": 3199574,
+          "Scottish_Power_Electric_filled.pdf": 2959055,
+          "Smartest_filled.pdf": 3069560,
+          "Total_Electricity_filled.pdf": 3273313,
+          "Valda_filled.pdf": 3094305,
+          "YGP_filled.pdf": 540663,
+          "YU_filled.pdf": 408293,
+          "loa_template_filled.pdf": 894886
+        },
+        "package.json": 436,
+        "pdf output": {
+          ".DS_Store": 6148
+        },
+        "scripts": {
+          "test.ts": 2579
+        },
+        "src": {
+          "contract_templates_list.ts": 631,
+          "fill_pdf.ts": 4561,
+          "index.ts": 96,
+          "types": {
+            "index.ts": 3700
+          }
+        },
+        "tsconfig.json": 185
+      }
+    },
+    "response.json": 720,
+    "tsconfig.base.json": 651,
+    "tsconfig.json": 968,
+    "webpack.config.base.ts": 2346,
+    "yarn.lock": 286718
+  },
+  "local-helpers": {
+    "aws-ecr-scan-image.sh": 2874,
+    "db-setup.sh": 410,
+    "deploy-quote-container-prod.sh": 1992,
+    "docker-clean.sh": 185,
+    "migration-apply-cloud.sh": 2907,
+    "mpan_puller.js": 9840,
+    "mpan_puller_postcodes.json": 883,
+    "postgres-setup-database.sh": 553,
+    "rebuild.sh": 499,
+    "sendgrid_csv": {
+      ".DS_Store": 8196,
+      ".env": 87,
+      ".env.example": 91,
+      ".gitignore": 50,
+      "README.md": 566,
+      "data": {
+        "input.csv": 490,
+        "output.csv": 592,
+        "unsubscribers.json": 5173
+      },
+      "duplicate_check.py": 845,
+      "load_env_variables.py": 661,
+      "sendgrid_csv.py": 2550,
+      "test_load_env_variables.py": 988,
+      "test_sendgrid_csv.py": 1459
+    },
+    "test.sh": 222,
+    "upload-s3-contracts.sh": 1864
+  },
+  "nginx": {},
+  "nginx.conf": 3215,
+  "python": {
+    ".DS_Store": 6148,
+    ".flake8": 154,
+    ".pylintrc": 97,
+    "Dockerfile": 1594,
+    "Dockerfile.test": 1663,
+    "Pipfile": 1440,
+    "Pipfile.lock": 163060,
+    "README.md": 751,
+    "__init__.py": 0,
+    "alembic": {
+      "README": 39,
+      "__init__.py": 1,
+      "env.py": 4340,
+      "script.py.mako": 494,
+      "versions": {
+        "20230213_6336bb6262d6_go_live.py": 14676,
+        "20230213_8c874bf7a131_add_verified_at_to_companybankingdetails.py": 1016,
+        "20230215_e6fd046e2b3d_remove_companycontacthistory.py": 1837,
+        "20230217_dbc65ece32a3_sole_trader.py": 2053,
+        "20230221_53ec2d7255b6_forename_surename.py": 991,
+        "20230228_c3b91e1c5c5f_remove_unused_usage_fields.py": 993,
+        "20230315_a84015dff2c4_selected_contract_id.py": 1025,
+        "20230315_b7c17a266978_auth_token.py": 1507,
+        "20230316_552fcee8f23d_ondelete_selected_contract.py": 1020,
+        "20230316_eed22e0af9ba_dont_delete_company_on_delete_contract.py": 1061,
+        "20230317_5917d5196376_auth_token_fix.py": 1085,
+        "20230323_33554f514a62_contract_fix.py": 1015,
+        "20230323_e7d296a1f94f_companyaquisitioninfo.py": 1541,
+        "20230329_d71ce47a76df_acquisition_holds_target_email_and_.py": 1834,
+        "20230405_b1c2a475dad9_remove_unique_constraint_for_contacts.py": 919,
+        "__init__.py": 1
+      }
+    },
+    "alembic.ini": 2200,
+    "app": {
+      ".DS_Store": 6148,
+      "__init__.py": 0,
+      "api": {
+        ".DS_Store": 10244,
+        "__init__.py": 1,
+        "blueprint.py": 603,
+        "bridge": {
+          "__init__.py": 1,
+          "views.py": 1463
+        },
+        "common": {
+          "__init__.py": 51,
+          "constants.py": 172,
+          "dtos.py": 3228,
+          "exceptions.py": 223,
+          "quote_failure": {
+            "__init__.py": 252,
+            "decorator.py": 1874,
+            "emails.py": 5144,
+            "exceptions.py": 4655
+          },
+          "route.py": 3301,
+          "services.py": 752
+        },
+        "companies": {
+          "__init__.py": 1,
+          "dtos": {
+            "__init__.py": 288,
+            "email_verification.py": 370,
+            "request.py": 8003,
+            "response.py": 3356
+          },
+          "exceptions.py": 914,
+          "services.py": 15539,
+          "views.py": 9451
+        },
+        "contracts": {
+          ".DS_Store": 6148,
+          "__init__.py": 1,
+          "data": {},
+          "dtos": {
+            "exceptions.py": 94,
+            "request.py": 910,
+            "response.py": 1999
+          },
+          "services.py": 4618,
+          "views.py": 15213
+        },
+        "providers": {
+          "__init__.py": 1,
+          "dtos.py": 241,
+          "views.py": 2157
+        },
+        "public": {
+          "__init__.py": 1,
+          "dtos": {
+            "request.py": 772,
+            "response.py": 780
+          },
+          "services.py": 1526,
+          "views.py": 2013
+        },
+        "quotes": {
+          "__init__.py": 1,
+          "dtos": {
+            "request.py": 1975,
+            "response.py": 2546
+          },
+          "services.py": 7147,
+          "views.py": 12111
+        },
+        "reports": {
+          "__init__.py": 0,
+          "mapper.py": 7235,
+          "services.py": 4348,
+          "views.py": 1966
+        },
+        "security": {
+          "__init__.py": 1,
+          "dtos": {
+            "request.py": 1497,
+            "response.py": 175
+          },
+          "services.py": 4690,
+          "views.py": 4150
+        },
+        "usage": {
+          "__init__.py": 1,
+          "constants.py": 75,
+          "services.py": 2534,
+          "utils.py": 1645,
+          "views.py": 9236
+        }
+      },
+      "app.py": 2589,
+      "common": {
+        ".DS_Store": 6148,
+        "__init__.py": 1,
+        "aws": {
+          "__init__.py": 1,
+          "secrets_retrieval.py": 848
+        },
+        "constants.py": 1389,
+        "db": {
+          "__init__.py": 154,
+          "connection.py": 1314,
+          "session.py": 1060
+        },
+        "is_in_local_mode.py": 857,
+        "local_mode.py": 1109,
+        "local_mode_data": {
+          ".DS_Store": 6148,
+          "__init__.py": 1,
+          "electralink.py": 4188693,
+          "lambdas.py": 843,
+          "local_mode_pdf.pdf": 1769,
+          "pdf_as_bytearray.py": 511,
+          "udcore.py": 7849
+        },
+        "mpan.py": 5128,
+        "secrets": {
+          "__init__.py": 33,
+          "secrets.py": 2876
+        },
+        "security": {
+          "__init__.py": 111,
+          "csrf": {
+            "__init__.py": 108,
+            "check.py": 5185,
+            "exceptions.py": 218,
+            "inject.py": 4120
+          },
+          "decorators.py": 2112,
+          "session.py": 2421
+        },
+        "utils": {
+          "__init__.py": 125,
+          "accepts_kwarg.py": 220,
+          "call_endpoint.py": 2117,
+          "company_number.py": 745,
+          "csv_generator.py": 2604,
+          "decode_base64_string.py": 334,
+          "human_readable.py": 830,
+          "is_valid_email_address.py": 376,
+          "random_string.py": 228,
+          "test_human_readable.py": 639
+        }
+      },
+      "config.py": 2437,
+      "constants.py": 155,
+      "domains": {
+        "dropoff": {
+          "__init__.py": 152,
+          "scheduler.py": 4706
+        }
+      },
+      "integrations": {
+        "__init__.py": 1,
+        "electralink": {
+          "__init__.py": 268,
+          "_types.py": 1420,
+          "api_utils.py": 1733,
+          "get_mpan_hhcombined.py": 2235,
+          "models.py": 1289,
+          "mpan.py": 840,
+          "mpan_additional_details.py": 2696,
+          "mpan_key_decrypt.py": 1381,
+          "postcode.py": 1170,
+          "usage.py": 2708
+        },
+        "lambdas": {
+          "__init__.py": 264,
+          "bank_account_validation": {
+            "__init__.py": 71,
+            "validate_bank_account.py": 831
+          },
+          "common.py": 1374,
+          "companies_lookup": {
+            "__init__.py": 72,
+            "companies_lookup.py": 997,
+            "models.py": 907
+          },
+          "contract_pdf_generator": {
+            "__init__.py": 119,
+            "contract_pdf_generator.py": 4008,
+            "supplier_template_keys.py": 1439
+          },
+          "credit_score": {
+            "__init__.py": 61,
+            "get_credit_score.py": 987
+          },
+          "messaging": {
+            "__init__.py": 262,
+            "email_contract_completion.py": 5360,
+            "email_quote_failure.py": 7178,
+            "email_rejoin_existing_fuzzy_matched_company.py": 3027,
+            "email_verification.py": 1089,
+            "sole_trader.py": 1211
+          },
+          "notify_scheduler": {
+            "__init__.py": 117,
+            "notify_scheduler.py": 2138
+          },
+          "payloads": {
+            "__init__.py": 234,
+            "email.py": 9515,
+            "pdf.py": 8991
+          }
+        },
+        "s3": {
+          "__init__.py": 0,
+          "save_data.py": 1359
+        },
+        "udcore": {
+          "__init__.py": 49,
+          "data": {
+            "quote_definitions.py": 60383
+          },
+          "electric_prices.py": 6371,
+          "electricprices": {
+            "__init__.py": 1,
+            "http.py": 1374
+          }
+        }
+      },
+      "logging.py": 4105,
+      "models": {
+        "__init__.py": 545,
+        "common.py": 1336,
+        "companies": {
+          "README.md": 3191,
+          "__init__.py": 439,
+          "auth.py": 740,
+          "banking.py": 859,
+          "company.py": 8735,
+          "company_aquisition_info.py": 758,
+          "contact.py": 1814,
+          "credit_score.py": 334,
+          "industry.py": 336,
+          "site.py": 1255,
+          "sole_trader.py": 1887
+        },
+        "contracts.py": 1482,
+        "electricity": {
+          "__init__.py": 70,
+          "tariffs.py": 113,
+          "usage.py": 2747
+        },
+        "email.py": 1231,
+        "enums.py": 1875,
+        "industry.py": 416,
+        "providers.py": 1709,
+        "quotes": {
+          "__init__.py": 99,
+          "quote.py": 2404,
+          "quote_list.py": 2684
+        },
+        "reports": {
+          "quote_rag.py": 3952
+        },
+        "utils": {
+          "__init__.py": 35,
+          "pickle.py": 946
+        }
+      },
+      "repository": {
+        "__init__.py": 0,
+        "companies.py": 12014,
+        "contracts.py": 4652,
+        "electricity_usage.py": 1220,
+        "industry.py": 408,
+        "provider.py": 1688,
+        "quotes.py": 1841
+      },
+      "server.py": 2137,
+      "tests": {
+        "__init__.py": 0,
+        "api": {
+          "__init__.py": 0,
+          "common": {
+            "__init__.py": 0,
+            "test_services.py": 1045
+          }
+        },
+        "utils": {
+          "test_is_valid_email.py": 1620
+        }
+      },
+      "typestubs": {
+        ".gitkeep": 1
+      }
+    },
+    "docs": {
+      "db_migrations.md": 1944,
+      "local_mode.md": 928,
+      "tests.md": 555
+    },
+    "dumps": {
+      ".DS_Store": 10244,
+      "udcore": {
+        ".gitkeep": 0,
+        "request_01801HBA_2600002673907.json": 79828,
+        "request_01801HBA_2600002674005.json": 79828,
+        "request_01801HBA_2600002674014.json": 79828,
+        "request_01801HBA_2600002674149.json": 79828,
+        "request_01801HBA_2600002674316.json": 82829,
+        "request_01801HBA_2600002674440.json": 79828,
+        "request_03107H38_2000000853940.json": 82831,
+        "request_03801131_1610028163237.json": 82824,
+        "request_03801631_1610028163264.json": 79825,
+        "request_03801631_1610028163273.json": 79823,
+        "request_04065H17_2000011407956.json": 82847,
+        "response_01801HBA_2600002673907.json": 390002,
+        "response_01801HBA_2600002674005.json": 390197,
+        "response_01801HBA_2600002674014.json": 390002,
+        "response_01801HBA_2600002674149.json": 390197,
+        "response_01801HBA_2600002674316.json": 402250,
+        "response_01801HBA_2600002674440.json": 402243,
+        "response_03107H38_2000000853940.json": 405385,
+        "response_03801131_1610028163237.json": 404441,
+        "response_03801631_1610028163264.json": 390772,
+        "response_03801631_1610028163273.json": 392336,
+        "response_04065H17_2000011407956.json": 404450
+      }
+    },
+    "pylint.txt": 16334,
+    "pyproject.toml": 544,
+    "pyrightconfig.json": 3496,
+    "pytest.ini": 29,
+    "quote": {
+      "app": {
+        "contracts": {
+          "templates": {
+            "PDF Contracts": {}
+          }
+        }
+      }
+    },
+    "scripts": {
+      "fixup.sh": 398,
+      "migration-apply.sh": 236,
+      "migration-create.sh": 782,
+      "migration-rollback-one.sh": 229
+    }
+  },
+  "seeder": {
+    ".env": 370,
+    ".env.local": 160,
+    ".gitignore": 157,
+    ".npmignore": 119,
+    ".nvmrc": 12,
+    ".yarnrc.yml": 66,
+    "README.md": 1195,
+    "env-config.ts": 2113,
+    "package.json": 1687,
+    "serverless.ts": 1741,
+    "src": {
+      "constants": {
+        "environment.ts": 271
+      },
+      "functions": {
+        "index.ts": 42,
+        "recreate": {
+          "handler.ts": 770,
+          "index.ts": 514
+        },
+        "seed": {
+          "companieshouse-constants.ts": 86140,
+          "handler.ts": 709,
+          "index.ts": 636,
+          "providers.ts": 44578
+        },
+        "services": {
+          "seed.ts": 12907
+        },
+        "setup": {
+          "handler.ts": 768,
+          "index.ts": 511
+        }
+      },
+      "libs": {
+        "apiGateway.ts": 508,
+        "handlerResolver.ts": 132,
+        "lambda.ts": 187,
+        "pgClient.ts": 3726,
+        "secret-retrival.ts": 2422
+      }
+    },
+    "tsconfig.json": 580,
+    "tsconfig.paths.json": 147,
+    "webpack.config.js": 1369,
+    "yarn.lock": 219242
+  },
+  "ssl": {
+    "cert.pem": 2102,
+    "key.pem": 3276,
+    "nginx-selfsigned.crt": 1428,
+    "nginx-selfsigned.key": 1704
+  },
+  "terraform": {
+    ".DS_Store": 6148,
+    "README.md": 2090,
+    "composition": {
+      ".DS_Store": 6148,
+      ".pre-commit-config.yaml": 1209,
+      ".terraform-version": 6,
+      ".terraform.lock.hcl": 2680,
+      "Makefile": 3912,
+      "README.md": 100,
+      "backend.tf": 400,
+      "common_data.tf": 61,
+      "data.tf": 142,
+      "environments": {
+        ".DS_Store": 6148,
+        "dev.tfvars": 815,
+        "pen.tfvars": 814,
+        "prod.tfvars": 986
+      },
+      "infracost-usage.yml": 76060,
+      "locals.tf": 309,
+      "main.tf": 4807,
+      "output.tf": 242,
+      "providers.tf": 463,
+      "scripts": {
+        "aws-terraform-checks.sh": 1753
+      },
+      "variables.tf": 1745,
+      "versions.tf": 151
+    },
+    "diagrams": {
+      "watt architecture-Main architecture.drawio.png": 323973,
+      "watt architecture-Organization.drawio.png": 137876,
+      "watt architecture.drawio": 59686
+    },
+    "modules": {
+      "common_data": {
+        ".pre-commit-config.yaml": 1209,
+        "README.md": 420,
+        "locals.tf": 12,
+        "outputs.tf": 345,
+        "provider.tf": 42,
+        "variables.tf": 937,
+        "versions.tf": 45
+      },
+      "infrastructure": {
+        "README.md": 149,
+        "app_load_balancer": {
+          ".pre-commit-config.yaml": 1209,
+          "README.md": 100,
+          "data.tf": 44,
+          "main.tf": 3886,
+          "outputs.tf": 350,
+          "route53.tf": 284,
+          "variables.tf": 763
+        },
+        "messaging": {
+          "cw.tf": 642,
+          "data.tf": 107,
+          "definitions": {
+            "messaging-reminders.json": 1408
+          },
+          "locals.tf": 68,
+          "outputs.tf": 109,
+          "s3.tf": 254,
+          "sfn.tf": 853,
+          "sg.tf": 1807,
+          "sm.tf": 830,
+          "sns.tf": 433,
+          "sqs.tf": 241,
+          "ssm.tf": 2135,
+          "variables.tf": 940
+        },
+        "monitoring": {},
+        "networking": {
+          ".pre-commit-config.yaml": 1209,
+          "README.md": 100,
+          "main.tf": 1511,
+          "outputs.tf": 1051,
+          "ssm.tf": 291,
+          "variables.tf": 1088
+        },
+        "quotation_app": {
+          ".pre-commit-config.yaml": 1209,
+          "container-definitions": {
+            "quote-container-definitions.json": 4473
+          },
+          "data.tf": 543,
+          "ec.tf": 1274,
+          "ecr.tf": 766,
+          "ecs.tf": 9799,
+          "locals.tf": 286,
+          "outputs.tf": 282,
+          "s3_contracts.tf": 1138,
+          "s3_logging.tf": 157,
+          "sg.tf": 971,
+          "ssm.tf": 2406,
+          "variables.tf": 2107
+        },
+        "quotation_db": {
+          "data.tf": 44,
+          "output.tf": 141,
+          "rds.tf": 4992,
+          "sm.tf": 780,
+          "ssm.tf": 648,
+          "variables.tf": 1472
+        },
+        "secrets": {
+          "README.md": 194,
+          "main.tf": 1755,
+          "outputs.tf": 399,
+          "ssm.tf": 1027,
+          "variables.tf": 352
+        }
+      },
+      "resource": {
+        "compute": {
+          "README.md": 106,
+          "ecs": {
+            "ecs_variables.tf": 2162,
+            "main.tf": 1097,
+            "outputs.tf": 1,
+            "service": {
+              "data.tf": 63,
+              "main.tf": 8409,
+              "variables.tf": 626,
+              "versions.tf": 150
+            },
+            "variables.tf": 263,
+            "versions.tf": 85
+          }
+        },
+        "networking": {
+          "route53": {
+            "outputs.tf": 725,
+            "route53.tf": 6417,
+            "variables.tf": 235
+          },
+          "vpc": {
+            "README.md": 86
+          }
+        },
+        "storage": {
+          "README.md": 119,
+          "data.tf": 40,
+          "iam.tf": 628,
+          "outputs.tf": 273,
+          "s3.tf": 2426,
+          "variables.tf": 734
+        }
+      }
+    },
+    "remote_state": {
+      ".pre-commit-config.yaml": 1209,
+      "README.md": 365,
+      "terraform": {
+        ".terraform.lock.hcl": 1195,
+        "README.md": 742,
+        "backend.tf": 316,
+        "common_data.tf": 64,
+        "locals.tf": 109,
+        "main.tf": 2045,
+        "modules": {
+          "terraform-remote-state-backend": {
+            ".gitignore": 731,
+            ".pre-commit-config.yaml": 1209,
+            "README.md": 4235,
+            "data.tf": 54,
+            "examples": {
+              "simple": {
+                "main.tf": 464,
+                "variables.tf": 302
+              }
+            },
+            "main.tf": 1586,
+            "outputs.tf": 595,
+            "policy.tf": 1089,
+            "variables.tf": 2831,
+            "versions.tf": 151
+          }
+        },
+        "outputs.tf": 713,
+        "providers.tf": 245,
+        "terraform.tfstate.backup": 22830,
+        "variables.tf": 142,
+        "versions.tf": 151
+      }
+    },
+    "shared": {
+      "backend.tf": 392,
+      "common_data.tf": 61,
+      "data.tf": 0,
+      "default.tfvars": 28,
+      "iam_idp.tf": 1222,
+      "locals.tf": 114,
+      "main.tf": 780,
+      "output.tf": 0,
+      "providers.tf": 122,
+      "variables.tf": 612,
+      "versions.tf": 151
+    }
+  }
+}

@@ -43,6 +43,7 @@ FROM base AS runtime
 COPY --from=python-deps /.venv /.venv
 # Set virtual env path
 ENV PATH="/.venv/bin:$PATH"
+ENV PY_COLORS=1
 
 # Create and switch to a new user
 RUN useradd --create-home appuser
@@ -50,8 +51,13 @@ WORKDIR /home/appuser
 VOLUME /home/appuser
 USER appuser
 
+# Set PYTHONPATH to include src directory using a relative path
+ENV PYTHONPATH="./src:$PYTHONPATH"
+
 # Install application into container
 COPY ./ ./
 
 # Run the application
-ENTRYPOINT ["python", "-m", "src.main"]
+# ENTRYPOINT ["python", "-m", "src.main"]
+
+CMD ["python", "src/main.py"]

@@ -4,9 +4,9 @@
 
 Proloquium is an Artificial General Intelligence (AGI) system that leverages the power of Large Language Models (LLMs), LangChain, and Pinecone. Proloquium is a conversational AI system that uses Pinecone and LangChain to provide a conversational experience for end users who known little to nothing about the software development lifecycle to build high quality software that follows best practices with a focus on design patterns, scalability, testability, maintainability, security, performance, high availability. The end result form Proloquium is a software development plan that is generated from the conversation with the end user. This is then turned into a working prototype that can be continuously improved upon by the end user through conversation with Proloquium.
 
-## Who am I?
+## How to use it?
 
-In Proloquium you are the executive sponsor you will interact with the **Project Manager**, **Project Owner** and **Lead Engineer** to define the project scope, timeline, and budget. You will also be responsible for providing the resources needed to complete the project.
+In Proloquium you are the executive sponsor or customer you will interact with the **Project Manager**, **Project Owner** and **Lead Engineer** to define the project scope, timeline, and budget. You will also be responsible for providing the resources needed to complete the project.
 
 - **YOU Executive Sponsor**: Provides overall project vision, support, and financial resources.
 
@@ -23,7 +23,7 @@ Proloquium has multiple agents that are responsible for different tasks. The age
 - **Mobile Developer**: Specializes in developing applications for mobile platforms, such as iOS and Android.
 - **Quality Assurance (QA) Engineer**: Tests the software for bugs, usability, and performance issues.
 - **DevOps Engineer**: Streamlines development and deployment processes to improve efficiency and reliability.
-- **UX/UI Designer**: Designs user interfaces and ensures a positive user experience.
+- **UI/UX Designer**: Designs user interfaces and ensures a positive user experience.
 - **Technical Writer**: Creates documentation and user guides for the software.
 - **Data Scientist/Engineer**: Analyzes and processes data, creating insights and developing machine learning models.
 - **Security Engineer**: Ensures the software and infrastructure are secure from vulnerabilities and attacks.

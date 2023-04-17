@@ -1,0 +1,271 @@
+{
+    "terraform": {
+        "diagrams": {},
+        "shared": {},
+        "remote_state": {
+            "terraform": {
+                "modules": {
+                    "terraform-remote-state-backend": {
+                        "examples": {
+                            "simple": {}
+                        }
+                    }
+                }
+            }
+        },
+        "composition": {
+            "environments": {},
+            "scripts": {}
+        },
+        "modules": {
+            "common_data": {},
+            "resource": {
+                "networking": {
+                    "vpc": {},
+                    "route53": {}
+                },
+                "storage": {},
+                "compute": {
+                    "ecs": {
+                        "service": {}
+                    }
+                }
+            },
+            "infrastructure": {
+                "quotation_db": {},
+                "secrets": {},
+                "networking": {},
+                "app_load_balancer": {},
+                "monitoring": {},
+                "quotation_app": {
+                    "container-definitions": {}
+                },
+                "messaging": {
+                    "definitions": {}
+                }
+            }
+        }
+    },
+    "ssl": {},
+    "seeder": {
+        "src": {
+            "constants": {},
+            "libs": {},
+            "functions": {
+                "seed": {},
+                "setup": {},
+                "recreate": {},
+                "services": {}
+            }
+        }
+    },
+    "python": {
+        "dumps": {
+            "udcore": {}
+        },
+        "app": {
+            "repository": {},
+            "typestubs": {},
+            "domains": {
+                "dropoff": {}
+            },
+            "tests": {
+                "utils": {},
+                "api": {
+                    "common": {}
+                }
+            },
+            "models": {
+                "quotes": {},
+                "utils": {},
+                "electricity": {},
+                "companies": {},
+                "reports": {}
+            },
+            "integrations": {
+                "lambdas": {
+                    "companies_lookup": {},
+                    "payloads": {},
+                    "notify_scheduler": {},
+                    "bank_account_validation": {},
+                    "contract_pdf_generator": {},
+                    "credit_score": {},
+                    "messaging": {}
+                },
+                "s3": {},
+                "udcore": {
+                    "electricprices": {},
+                    "data": {}
+                },
+                "electralink": {}
+            },
+            "common": {
+                "local_mode_data": {},
+                "security": {
+                    "csrf": {}
+                },
+                "secrets": {},
+                "utils": {},
+                "db": {},
+                "aws": {}
+            },
+            "api": {
+                "quotes": {
+                    "dtos": {}
+                },
+                "security": {
+                    "dtos": {}
+                },
+                "bridge": {},
+                "contracts": {
+                    "dtos": {},
+                    "data": {}
+                },
+                "providers": {},
+                "usage": {},
+                "common": {
+                    "quote_failure": {}
+                },
+                "public": {
+                    "dtos": {}
+                },
+                "companies": {
+                    "dtos": {}
+                },
+                "reports": {}
+            }
+        },
+        "quote": {
+            "app": {
+                "contracts": {
+                    "templates": {
+                        "PDF Contracts": {}
+                    }
+                }
+            }
+        },
+        "docs": {},
+        "scripts": {},
+        "alembic": {
+            "versions": {}
+        }
+    },
+    "docs": {},
+    "nginx": {},
+    "lambda": {
+        "lambdas": {
+            "data-8": {
+                "lib": {
+                    "src": {
+                        "functions": {
+                            "bank-account-validation": {}
+                        }
+                    }
+                },
+                "src": {
+                    "constants": {},
+                    "functions": {
+                        "bank-account-validation": {},
+                        "events": {}
+                    },
+                    "services": {}
+                }
+            },
+            "notify-scheduler": {
+                "src": {
+                    "constants": {},
+                    "functions": {
+                        "start-reminder": {},
+                        "stop-reminder": {}
+                    },
+                    "services": {}
+                }
+            },
+            "experian": {
+                "lib": {},
+                "src": {
+                    "constants": {},
+                    "functions": {
+                        "events": {},
+                        "commercial-delphi-score": {
+                            "services": {}
+                        }
+                    }
+                }
+            },
+            "contract-pdf-generator": {
+                "scripts": {},
+                "lib": {},
+                "src": {
+                    "constants": {},
+                    "functions": {
+                        "create-pdf": {},
+                        "events": {},
+                        "sign-contract": {}
+                    },
+                    "fonts": {}
+                }
+            },
+            "companies-house": {
+                "src": {
+                    "config": {},
+                    "functions": {
+                        "company-lookup": {},
+                        "events": {}
+                    }
+                }
+            },
+            "messaging": {
+                "out": {},
+                "src": {
+                    "constants": {},
+                    "functions": {
+                        "send-email": {
+                            "s3": {},
+                            "scripts": {}
+                        }
+                    },
+                    "templates": {
+                        "layout": {},
+                        "partials": {}
+                    },
+                    "services": {}
+                }
+            }
+        },
+        "packages": {
+            "pdf": {
+                "out": {},
+                "scripts": {},
+                "pdf output": {},
+                "data": {
+                    "mutations": {},
+                    "audit_template": {},
+                    "electric_template": {},
+                    "fonts": {},
+                    "loa_template": {}
+                },
+                "src": {
+                    "types": {}
+                }
+            },
+            "common": {
+                "src": {
+                    "types": {},
+                    "config": {},
+                    "libs": {}
+                }
+            }
+        }
+    },
+    "data": {
+        "pdf": {
+            "contracts": {}
+        }
+    },
+    "local-helpers": {
+        "sendgrid_csv": {
+            "data": {}
+        }
+    }
+}

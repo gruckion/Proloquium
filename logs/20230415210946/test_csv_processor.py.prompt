@@ -1,0 +1,87 @@
+[test_csv_processor.py]
+```python
+"""This module contains the unit tests for the CSVProcessor class."""
+
+import csv
+from typing import List, Dict
+from unittest.mock import patch, mock_open
+
+import pytest
+
+from csv_processor import CSVProcessor
+
+
+def test_csv_processor_init():
+    input_csv = "data/input.csv"
+    output_csv = "data/output.csv"
+    csv_processor = CSVProcessor(input_csv, output_csv)
+
+    assert csv_processor.input_csv == input_csv
+    assert csv_processor.output_csv == output_csv
+
+
+def test_csv_processor_read_input_csv():
+    input_csv = "data/input.csv"
+    expected_output = [
+        {"name": "John Doe", "age": "30", "location": "New York"},
+        {"name": "Jane Smith", "age": "25", "location": "San Francisco"},
+    ]
+
+    with patch("builtins.open", mock_open(read_data="name,age,location\nJohn Doe,30,New York\nJane Smith,25,San Francisco\n")):
+        csv_processor = CSVProcessor(input_csv, "data/output.csv")
+        assert csv_processor.read_input_csv() == expected_output
+
+
+def test_csv_processor_process_csv():
+    rows = [
+        {"name": "John Doe", "age": "30", "location": "New York"},
+        {"name": "Jane Smith", "age": "25", "location": "San Francisco"},
+    ]
+    expected_output = [
+        {"name": "John Doe", "age": "30", "location": "New York"},
+        {"name": "Jane Smith", "age": "25", "location": "San Francisco"},
+    ]
+
+    assert CSVProcessor.process_csv(rows) == expected_output
+
+
+def test_csv_processor_generate_output_csv():
+    output_csv = "data/output.csv"
+    processed_data = [
+        {"name": "John Doe", "age": "30", "location": "New York"},
+        {"name": "Jane Smith", "age": "25", "location": "San Francisco"},
+    ]
+
+    with patch("builtins.open", mock_open()) as mock_file:
+        csv_processor = CSVProcessor("data/input.csv", output_csv)
+        csv_processor.generate_output_csv(processed_data)
+
+        mock_file.assert_called_with(output_csv, mode="w", newline="")
+        writer = csv.DictWriter(mock_file.return_value, fieldnames=processed_data[0].keys())
+        writer.writeheader.assert_called_once()
+        writer.writerows.assert_called_once_with(processed_data)
+
+
+@pytest.fixture
+def csv_processor():
+    input_csv = "data/input.csv"
+    output_csv = "data/output.csv"
+    return CSVProcessor(input_csv, output_csv)
+
+
+@pytest.fixture
+def input_data():
+    return [
+        {"name": "John Doe", "age": "30", "location": "New York"},
+        {"name": "Jane Smith", "age": "25", "location": "San Francisco"},
+    ]
+
+
+def test_csv_processor_integration(csv_processor: CSVProcessor, input_data: List[Dict[str, str]]):
+    processed_data = csv_processor.process_csv(input_data)
+    csv_processor.generate_output_csv(processed_data)
+
+    with open(csv_processor.output_csv, mode="r") as output_file:
+        csv_reader = csv.DictReader(output_file)
+        assert list(csv_reader) == processed_data
+```

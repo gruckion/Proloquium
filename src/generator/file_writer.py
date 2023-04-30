@@ -11,6 +11,7 @@ class FileData:
 
 
 def save_files(project_path: str, files: list[FileData]):
+    print(f"Saving files to {project_path}")
     for file_name, content in files:
         file_writer = FileWriter(filename=file_name, content=content)
         file_writer.save(project_path)
@@ -33,5 +34,6 @@ class FileWriter:
             os.makedirs(
                 os.path.dirname(full_path), exist_ok=True)
 
+        print(f"Saving to: {full_path}")
         with open(full_path, "w", encoding="utf-8") as file:
             file.write(self.content)

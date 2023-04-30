@@ -1,5 +1,5 @@
 import docker
-from docker.models.containers import Container
+from docker.models.containers import Container, ExecResult
 
 
 def start_container(working_dir: str, volumes) -> Container:
@@ -21,7 +21,7 @@ def start_container(working_dir: str, volumes) -> Container:
     )
 
 
-def execute_command(container: Container, user_command: str) -> tuple[bytes, bytes]:
+def execute_command(container: Container, user_command: str) -> ExecResult:
     """
     Executes a given command against the specified Docker container.
     
@@ -30,11 +30,9 @@ def execute_command(container: Container, user_command: str) -> tuple[bytes, byt
         user_command (str): The command to run inside the container.
     
     Returns:
-        Tuple[bytes, bytes]: The stdout and stderr of the executed command.
+        ExecResult: The result of the command execution.
     """
-    exec_result = container.exec_run(user_command, stdout=True, stderr=True, demux=True)
-    stdout, stderr = exec_result.output
-    return stdout, stderr
+    return container.exec_run(user_command, stdout=True, stderr=True, stream=True)
 
 
 def shutdown_container(container: Container) -> None:

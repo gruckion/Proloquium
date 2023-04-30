@@ -14,10 +14,11 @@ Critical rules:
 - Split into # arrange, # act, # assert sections.
 - Mock filesystem and network calls when possible.
 - Must be strongly typed.
+- File path/name must be correct.
 
 For example:
 
-File: `{project_name}/src/{project_name}/example.py`
+File: `src/{project_name}/example.py`
 
 ```python
 """This is an example module."""
@@ -29,7 +30,7 @@ def example_function(input: Type):
     # ... more functions and classes to meet the requirements
 ```
 
-File: `{project_name}/tests/{project_name}/test_example.py`
+File: `tests/{project_name}/test_example.py`
 
 ```python
 """This is an example test module."""

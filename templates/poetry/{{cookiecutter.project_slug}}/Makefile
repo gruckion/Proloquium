@@ -20,7 +20,7 @@ install: ## Run `poetry install`
 	ls
 	poetry config virtualenvs.create true
 	poetry config virtualenvs.in-project true
-	poetry install -vvv
+	poetry install
 
 showdeps: ## run poetry to show deps
 	@echo "CURRENT:"
@@ -40,7 +40,7 @@ format: ## Formats you code with Black
 	poetry run black .
 
 test: hidden ## run pytest with coverage
-	poetry run pytest -v --cov {{ cookiecutter.module_name }}
+	poetry run pytest -v --cov {{ cookiecutter.module_name }} --color=yes
 
 build: install lint test ## run `poetry build` to build source distribution and wheel
 	poetry build

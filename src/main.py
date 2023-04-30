@@ -32,11 +32,11 @@ def main(task_description: str):
     response = chain.run(task_description=task_description, project_name=project_name)
 
     # Extract the files from the response and save them
-    code = extract_file_name_and_code(response)
-    save_files(project_path, code)
+    files = extract_file_name_and_code(response)
+    save_files(project_path, files)
 
     click.echo(response)
-    print(code)
+    print(files)
 
     # Define working directory inside the container
     container_working_dir = "/app"
@@ -48,6 +48,27 @@ def main(task_description: str):
 
     container = start_container(container_working_dir, volumes)
 
+    print("Installing prerequisites...")
+    result = execute_command(container, "apk add --no-cache make curl poetry")
+    for line in result.output:
+        print(line.decode('utf-8'), end='')
+
+    print("Installing dependencies...")
+    result = execute_command(container, "make install")
+    for line in result.output:
+        print(line.decode('utf-8'), end='')
+
+
+    print("Running formatter...")
+    result = execute_command(container, "make test")
+    for line in result.output:
+        print(line.decode('utf-8'), end='')
+
+    print("Running tests...")
+    result = execute_command(container, "make test")
+    for line in result.output:
+        print(line.decode('utf-8'), end='')
+
     while True:
         # apk add --no-cache make
         # curl -sSL https://install.python-poetry.org | POETRY_HOME=/etc/poetry python3 -
@@ -56,12 +77,11 @@ def main(task_description: str):
         if user_command == "exit":
             break
 
-        stdout, stderr = execute_command(container, "apk add --no-cache make curl poetry")
-        stdout, stderr = execute_command(container, user_command)
-
-        if stdout:
-            print(stdout.decode("utf-8"))
-        if stderr:
-            print(stderr.decode("utf-8"))
+        output, exit_code = execute_command(container, user_command)
+        if exit_code != 0:
+            print(f"Error: {exit_code}")
+        else:
+            for line in output:
+                print(line.decode('utf-8'), end='')
 
     shutdown_container(container)

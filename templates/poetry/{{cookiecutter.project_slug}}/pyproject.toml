@@ -1,0 +1,78 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.short_description }}"
+authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
+# Use identifier from https://spdx.org/licenses/
+license = "{{ cookiecutter.license }}"
+readme = "README.md"
+homepage = "https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_slug }}"
+repository = "https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_slug }}"
+documentation = "https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_slug }}/blob/master/README.md"
+classifiers = [
+    # https://pypi.org/classifiers/
+    {%- if cookiecutter.command_line_interface != "no cli" %}
+    "Environment :: Console",
+    {%- endif %}
+    "Development Status :: 1 - Planning",
+]
+{%- if cookiecutter.project_slug|lower|replace('-', '_') != cookiecutter.module_name %}
+packages = [
+    { include = "{{ cookiecutter.module_name }}", from = "src" }
+]
+{%- endif %}
+
+[tool.poetry.urls]
+# If you publish you package on PyPI, these will appear in the Project Links section.
+"Bug Tracker" = "https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_slug }}/issues"
+
+[tool.poetry.scripts]
+{%- if cookiecutter.command_line_interface != "no cli" %}
+{{ cookiecutter.project_slug }} = "{{ cookiecutter.module_name }}.cli:cli"
+{%- endif %}
+
+[tool.poetry.dependencies]
+python = "^3.8.0"
+{%- if cookiecutter.command_line_interface == "click" %}
+click = "^8.0.1"
+{%- endif %}
+{%- if cookiecutter.use_jupyterlab == "y" %}
+jupyterlab = "^3.0.0"
+pandas = "^1.2.0"
+jupyterlab_git = "^0.23.3"
+jupyterlab_widgets = "^1.0.0"
+{%- endif %}
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.6.2"
+black = "^22.0"
+bump2version = "^1.0.1"
+isort= "^5.0.8"
+flake8 = "^5.0.4"
+jedi-language-server = "^0.22.0"
+pylint = "^2.6.0"
+pytest = "^7.0.1"
+pytest-cov = "^3.0"
+pytest-xdist = "^2.5.0"
+vulture = "^2.3"
+mypy = "^0.982"
+{%- if cookiecutter.command_line_interface != "no cli" %}
+pyinstaller = "^4.1"
+{%- endif %}
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+# Example
+filterwarnings = [
+    "ignore::DeprecationWarning:moto.*:",
+    "ignore::DeprecationWarning:boto.*:",
+]

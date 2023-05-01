@@ -64,7 +64,7 @@ def main(task_description: str):
         print(line.decode("utf-8"), end="")
 
     print("Running formatter...")
-    result = execute_command(container, "make test")
+    result = execute_command(container, "make format")
     for line in result.output:
         print(line.decode("utf-8"), end="")
 

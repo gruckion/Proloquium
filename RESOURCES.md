@@ -17,3 +17,8 @@
 
 ## Interesting tool
 - [Fly](https://fly.io/) used to deploy apps all other the world used [here](https://github.com/sullivan-sean/chat-langchainjs)
+- [Tox](https://github.com/tox-dev/tox) used to run tests in multiple environments, used in https://github.com/AstraZeneca/magnus-core/blob/main/tox.ini Also consider [Nox](https://nox.thea.codes/en/stable/) used in  https://github.com/pyca/cryptography/blob/main/noxfile.py
+- [Pre-commit]()https://pre-commit.com/) used to run checks before commiting, used in https://github.com/bokeh/bokeh/blob/branch-3.2/.pre-commit-config.yaml
+- [Mega linter](https://github.com/oxsecurity/megalinter)
+- [DVC](https://github.com/iterative/dvc)
+- [Great Expectations](https://github.com/great-expectations/great_expectations) Always know what to expect from your data.

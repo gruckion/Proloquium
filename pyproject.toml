@@ -20,6 +20,7 @@ pyright = "^1.1.305"
 docker = "^6.0.1"
 colorama = "^0.4.6"
 ptyprocess = "^0.7.0"
+gradio = "^3.28.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.3.0"
@@ -78,6 +79,52 @@ select = [
     "T20", # flake8-print
 ]
 ignore = [
+    # (missing public docstrings) These work off of the Python sense of "public", rather than our
+    # bespoke definition based off of `@public`. When ruff supports custom plugins then we can write
+    # appropriate rules to require docstrings for `@public`.
+    "D100",
+    "D101", # Missing docstring in public class
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+
+    # (docstring imperative mood) Overly restrictive.
+    "D401",
+
+    # (module level import not at top) There are several places where we use e.g.
+    # warnings.filterwarings calls before imports.
+    "E402",
+
+    # (line too long): This fires for comments, which black won't wrap.
+    # Disabling until there is an autoformat solution available for comments.
+    "E501",
+
+    # (no type comparison): There are a few places where we use `== type(None)` which are more clear
+    # than the equivalent `isinstance` check.
+    'E721',
+
+    # (bare exception): There are many places where we want to catch a maximally generic exception.
+    'E722',
+
+    # (no assign lambda): existing code assigns lambdas in a few places. With black formatting
+    # requiring extra empty lines between defs, disallowing lambda assignment can make code less
+    # readable.
+    "E731",
+
+    # (no concatenation) Existing codebase has many concatentations, no reason to disallow them.
+    "RUF005",
+
+    ##### TEMPORARY DISABLES
+
+    # (assorted docstring rules) There are too many violations of these to enable
+    # right now, but we should enable after fixing the violations.
+    "D200",  # (one-line docstring should fit)
+    "D205",  # (blank line after summary)
+    "D417",  # (missing arg in docstring)
+
     "PTH123", # `open("foo")` should be replaced by `Path("foo").open()`
     "PTH120", # os.path.dirname` should be replaced by `.parent`
     "PTH118", # `os.path.join` should be replaced by foo_path / "bar"
@@ -91,8 +138,6 @@ ignore = [
     "PTH103", #`os.makedirs` should be replaced by `.mkdir(parents=True)`
     "PTH111", # `os.path.expanduser` should be replaced by `.expanduser()`
     "PLR0913", # Too many arguments to function call (6/5)
-    "D101", # Missing docstring in public class
-    "E501", # Line too long (89 > 88 characters)
 ]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
@@ -168,7 +213,6 @@ keep-runtime-typing = true
 [tool.ruff.per-file-ignores]
 # python scripts in bin/ needs some python path configurations before import
 "bin/*.py" = [
-    # E402: module-import-not-at-top-of-file
     "E402",
     # S603: `subprocess` call: check for execution of untrusted input
     # these are dev tools and do not have risks of malicious inputs.

@@ -53,23 +53,227 @@ setuptools = "^67.6.1"
 
 [tool.ruff]
 select = [
-  "E",  # pycodestyle
-  "F",  # pyflakes
-  "I",  # isort
+    "E",  # pycodestyle
+    "W",  # pycodestyle
+    "F",  # Pyflakes
+    "PL", # pylint
+    "I", # isort
+    "B", # flake8-bugbear
+    "A", # flake8-builtins
+    "S", # flake8-bandit
+    "ISC", # flake8-implicit-str-concat
+    "ICN", # flake8-import-conventions
+    "PIE", # flake8-pie
+    "Q", # flake8-quotes
+    "RET", # flake8-return
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "RUF", # Ruff-specific rules
+    "YTT", # flake8-2020
+    "UP", # pyupgrade
+    "C4", # flake8-comprehensions
+    "PTH", # flake8-use-pathlib
+    "G", # flake8-logging-format
+    "INP", # flake8-no-pep420
+    "T20", # flake8-print
 ]
+ignore = []
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "templates",
+]
+
+extend-select = [
+    "I", # Missing required import (auto-fixable)
+    "UP", # Pyupgrade
+    "RUF100", # Unused noqa (auto-fixable)
+
+    # We ignore more pydocstyle than we enable, so be more selective at what we enable
+    "D101",
+    "D106",
+    "D2",
+    "D3",
+    # "D401", # Not enabled by ruff, but we don't want it
+    "D402",
+    "D403",
+    "D412",
+    "D419"
+]
+extend-ignore = [
+    "D203",
+    "D205",
+    "D212",
+    "D213",
+    "D214",
+    "D215",
+    "E731",
+]
+
+# Same as Black.
+line-length = 88
+target-version = "py39"
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
+
+# https://github.com/charliermarsh/ruff/issues/2382
+[pyupgrade]
+keep-runtime-typing = true
+
+[tool.ruff.per-file-ignores]
+# python scripts in bin/ needs some python path configurations before import
+"bin/*.py" = [
+    # E402: module-import-not-at-top-of-file
+    "E402",
+    # S603: `subprocess` call: check for execution of untrusted input
+    # these are dev tools and do not have risks of malicious inputs.
+    # T201 `print` found
+    # print() is allowed in bin/ as they are dev tools.
+    "T201",
+]
+
+# Ignore pydoc style from these
+"*.pyi" = ["D"]
+"tests/*" = ["D"]
+"scripts/*" = ["D"]
+"dev/*" = ["D"]
+"docs/*" = ["D"]
+"provider_packages/*" = ["D"]
+"docker_tests/*" = ["D"]
+"kubernetes_tests/*" = ["D"]
+"*/example_dags/*" = ["D"]
+"chart/*" = ["D"]
+
+
+[pylint]
+max-args = 6  # We have many functions reaching 6 args
+load-plugins = "pylint_pydantic"
+max-line-length = 88
+disable= [
+  "W1203","R0903","W0105","W0621","C0114","C0301","C0116"
+]
+
+
+[tool.black]
+line-length = 120
+target_version = ['py37', 'py38', 'py39', 'py310']
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | pip-wheel-metadata
+    | examples
+    | templates
+  )/
+)
+'''
+
+[tool.ruff.isort]
+force-wrap-aliases = true
+force-single-line = false
+combine-as-imports = true
+split-on-trailing-comma = true
+order-by-type = true
+force-sort-within-sections = true
+
+[tool.autoflake]
+recursive = true
+remove-all-unused-imports = true
+remove-unused-variables = true
+ignore-init-module-imports = true
+remove-duplicate-keys = true
+expand-star-imports = true
 
 [tool.mypy]
 ignore_missing_imports = "True"
 disallow_untyped_defs = "True"
 exclude = ["notebooks"]
 
+[tool.pytest.ini_options]
+# * Disable `flaky` plugin for pytest. This plugin conflicts with `rerunfailures` because provide same marker.
+# * Disable `nose` builtin plugin for pytest. This feature deprecated in 7.2 and will be removed in pytest>=8
+# * And we focus on use native pytest capabilities rather than adopt another frameworks.
+addopts = "-rasl --verbosity=2 -p no:flaky -p no:nose --asyncio-mode=strict"
+norecursedirs = [
+    ".eggs",
+    "airflow",
+    "tests/dags_with_system_exit",
+    "tests/test_utils",
+    "tests/dags_corrupted",
+    "tests/dags",
+    "tests/system/providers/google/cloud/dataproc/resources",
+    "tests/system/providers/google/cloud/gcs/resources",
+]
+log_level = "INFO"
+filterwarnings = [
+    "error::pytest.PytestCollectionWarning",
+    "ignore::DeprecationWarning:flask_appbuilder.filemanager",
+    "ignore::DeprecationWarning:flask_appbuilder.widgets",
+    # https://github.com/dpgaspar/Flask-AppBuilder/pull/1940
+    "ignore::DeprecationWarning:flask_sqlalchemy",
+    # https://github.com/dpgaspar/Flask-AppBuilder/pull/1903
+    "ignore::DeprecationWarning:apispec.utils",
+]
+python_files = [
+    "*.py",
+]
+testpaths = [
+    "tests",
+]
+
 [tool.coverage.run]
 source = ["src"]
 branch = true
+skip_empty = true
 omit = [
     "tests/*",
     "src/__init__.py",
     "src/main.py",
+]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise NotImplementedError",
+    "return NotImplemented",
+    "@abstractmethod",
+    "@abstractproperty",
 ]
 
 [tool.coverage.report]
@@ -87,6 +291,7 @@ directory = "coverage_html_report"
 
 [tool.coverage.xml]
 output = "coverage.xml"
+
 
 
 [build-system]

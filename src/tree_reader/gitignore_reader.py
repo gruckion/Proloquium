@@ -11,7 +11,5 @@ def read_gitignore(path: str = ".") -> list[str]:
     :return: A list of patterns to be ignored.
     """
     with open(Path(path) / ".gitignore", "r", encoding="utf-8") as file:
-        patterns = [
-            line.strip() for line in file.readlines() if not line.startswith("#")
-        ]
+        patterns = [line.strip() for line in file.readlines() if not line.startswith("#")]
     return patterns

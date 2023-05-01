@@ -5,9 +5,7 @@ from pathlib import Path
 from typing import Optional, Union
 
 
-def tree(
-    root: Union[str, Path], ignore_patterns: list[str]
-) -> dict[str, Optional[dict]]:
+def tree(root: Union[str, Path], ignore_patterns: list[str]) -> dict[str, Optional[dict]]:
     """
     Create a nested dictionary representing the folder structure.
 
@@ -17,16 +15,11 @@ def tree(
     """
 
     def is_not_ignored(path: Path) -> bool:
-        return not any(
-            fnmatch.fnmatch(str(path), pattern) for pattern in ignore_patterns
-        )
+        return not any(fnmatch.fnmatch(str(path), pattern) for pattern in ignore_patterns)
 
     def generate_structure(path: Path) -> dict[str, Optional[dict]]:
         if path.is_dir():
-            return {
-                subpath.name: generate_structure(subpath)
-                for subpath in filter(is_not_ignored, path.iterdir())
-            }
+            return {subpath.name: generate_structure(subpath) for subpath in filter(is_not_ignored, path.iterdir())}
         else:
             return None
 

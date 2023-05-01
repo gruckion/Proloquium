@@ -1,9 +1,13 @@
 import click
-
 from langchain.chains import LLMChain
+
 from src.cookiecutter.cookiecutter import create_project
 from src.cookiecutter.templates import CookiecutterTemplate
-from src.executor.execute_code import execute_command, shutdown_container, start_container
+from src.executor.execute_code import (
+    execute_command,
+    shutdown_container,
+    start_container,
+)
 from src.extractor.code_extractor import extract_file_name_and_code
 from src.generator.file_writer import save_files
 from src.generator.templates import create_template_from_file
@@ -42,32 +46,29 @@ def main(task_description: str):
     container_working_dir = "/app"
 
     # Configure volumes
-    volumes = {
-        project_path: {"bind": container_working_dir, "mode": "rw"}
-    }
+    volumes = {project_path: {"bind": container_working_dir, "mode": "rw"}}
 
     container = start_container(container_working_dir, volumes)
 
     print("Installing prerequisites...")
     result = execute_command(container, "apk add --no-cache make curl poetry")
     for line in result.output:
-        print(line.decode('utf-8'), end='')
+        print(line.decode("utf-8"), end="")
 
     print("Installing dependencies...")
     result = execute_command(container, "make install")
     for line in result.output:
-        print(line.decode('utf-8'), end='')
-
+        print(line.decode("utf-8"), end="")
 
     print("Running formatter...")
     result = execute_command(container, "make test")
     for line in result.output:
-        print(line.decode('utf-8'), end='')
+        print(line.decode("utf-8"), end="")
 
     print("Running tests...")
     result = execute_command(container, "make test")
     for line in result.output:
-        print(line.decode('utf-8'), end='')
+        print(line.decode("utf-8"), end="")
 
     while True:
         # apk add --no-cache make
@@ -82,6 +83,6 @@ def main(task_description: str):
             print(f"Error: {exit_code}")
         else:
             for line in output:
-                print(line.decode('utf-8'), end='')
+                print(line.decode("utf-8"), end="")
 
     shutdown_container(container)

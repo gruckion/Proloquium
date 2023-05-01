@@ -1,14 +1,15 @@
 """Logging module for Auto-GPT."""
 import logging
+from logging import LogRecord
 import os
 import random
 import re
 import time
-from logging import LogRecord
 
 from colorama import Fore, Style
 
 from src.singleton import Singleton
+
 # from src.speech import say_text
 
 
@@ -42,23 +43,16 @@ class Logger(metaclass=Singleton):
         self.console_handler.setFormatter(console_formatter)
 
         # Info handler in activity.log
-        self.file_handler = logging.FileHandler(
-            os.path.join(log_dir, log_file), "a", "utf-8"
-        )
+        self.file_handler = logging.FileHandler(os.path.join(log_dir, log_file), "a", "utf-8")
         self.file_handler.setLevel(logging.DEBUG)
-        info_formatter = AutoGptFormatter(
-            "%(asctime)s %(levelname)s %(title)s %(message_no_color)s"
-        )
+        info_formatter = AutoGptFormatter("%(asctime)s %(levelname)s %(title)s %(message_no_color)s")
         self.file_handler.setFormatter(info_formatter)
 
         # Error handler error.log
-        error_handler = logging.FileHandler(
-            os.path.join(log_dir, error_file), "a", "utf-8"
-        )
+        error_handler = logging.FileHandler(os.path.join(log_dir, error_file), "a", "utf-8")
         error_handler.setLevel(logging.ERROR)
         error_formatter = AutoGptFormatter(
-            "%(asctime)s %(levelname)s %(module)s:%(funcName)s:%(lineno)d %(title)s"
-            " %(message_no_color)s"
+            "%(asctime)s %(levelname)s %(module)s:%(funcName)s:%(lineno)d %(title)s" " %(message_no_color)s"
         )
         error_handler.setFormatter(error_formatter)
 
@@ -76,9 +70,7 @@ class Logger(metaclass=Singleton):
 
         self.speak_mode = False
 
-    def typewriter_log(
-        self, title="", title_color="", content="", speak_text=False, level=logging.INFO
-    ):
+    def typewriter_log(self, title="", title_color="", content="", speak_text=False, level=logging.INFO):
         # if speak_text and self.speak_mode:
         #     say_text(f"{title}. {content}")
 
@@ -88,9 +80,7 @@ class Logger(metaclass=Singleton):
         else:
             content = ""
 
-        self.typing_logger.log(
-            level, content, extra={"title": title, "color": title_color}
-        )
+        self.typing_logger.log(level, content, extra={"title": title, "color": title_color})
 
     def debug(
         self,
@@ -129,9 +119,7 @@ class Logger(metaclass=Singleton):
         if message:
             if isinstance(message, list):
                 message = " ".join(message)
-        self.logger.log(
-            level, message, extra={"title": str(title), "color": str(title_color)}
-        )
+        self.logger.log(level, message, extra={"title": str(title), "color": str(title_color)})
 
     def set_level(self, level):
         self.logger.setLevel(level)
@@ -193,12 +181,7 @@ class AutoGptFormatter(logging.Formatter):
 
     def format(self, record: LogRecord) -> str:
         if hasattr(record, "color"):
-            record.title_color = (
-                getattr(record, "color")
-                + getattr(record, "title")
-                + " "
-                + Style.RESET_ALL
-            )
+            record.title_color = getattr(record, "color") + getattr(record, "title") + " " + Style.RESET_ALL
         else:
             record.title_color = getattr(record, "title")
         if hasattr(record, "msg"):
@@ -233,9 +216,7 @@ def print_assistant_thoughts(
         assistant_thoughts_plan = assistant_thoughts.get("plan")
         assistant_thoughts_criticism = assistant_thoughts.get("criticism")
         assistant_thoughts_speak = assistant_thoughts.get("speak")
-    logger.typewriter_log(
-        f"{ai_name.upper()} THOUGHTS:", Fore.YELLOW, f"{assistant_thoughts_text}"
-    )
+    logger.typewriter_log(f"{ai_name.upper()} THOUGHTS:", Fore.YELLOW, f"{assistant_thoughts_text}")
     logger.typewriter_log("REASONING:", Fore.YELLOW, f"{assistant_thoughts_reasoning}")
     if assistant_thoughts_plan:
         logger.typewriter_log("PLAN:", Fore.YELLOW, "")

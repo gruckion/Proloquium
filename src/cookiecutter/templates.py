@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class CookiecutterTemplate(Enum):
-    DEFAULT = 'templates/poetry'
+    DEFAULT = "templates/poetry"
     # DJANGO = 'https://github.com/pydanny/cookiecutter-django.git'
     # PYPACKAGE = 'https://github.com/audreyfeldroy/cookiecutter-pypackage.git'
     # FLASK = 'https://github.com/cookiecutter/cookiecutter-flask.git'

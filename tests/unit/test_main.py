@@ -1,7 +1,7 @@
 # tests/unit/test_main.py
-import pytest
 from click.testing import CliRunner
 from langchain.llms.fake import FakeListLLM
+import pytest
 
 from src.main import main
 

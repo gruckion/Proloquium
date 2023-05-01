@@ -26,13 +26,12 @@ class FileWriter:
 
     def save(self, project_path: str) -> None:
         """Save the content to the file."""
-        
+
         print(f"Saving: {self.filename}")
 
         full_path = os.path.join(project_path, self.filename)
         if self.filename:
-            os.makedirs(
-                os.path.dirname(full_path), exist_ok=True)
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
 
         print(f"Saving to: {full_path}")
         with open(full_path, "w", encoding="utf-8") as file:

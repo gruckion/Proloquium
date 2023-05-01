@@ -14,7 +14,10 @@ def mock_prolouqium_project_dir() -> MagicMock:
     Returns:
         MagicMock: Replaces the 'prolouqium_project_dir' function.
     """
-    with patch("src.generator.file_writer.prolouqium_project_dir", return_value="fake_directory") as mock_project_dir:
+    with patch(
+        "src.generator.file_writer.prolouqium_project_dir",
+        return_value="fake_directory",
+    ) as mock_project_dir:
         yield mock_project_dir
 
 
@@ -40,16 +43,22 @@ def mock_file_open() -> MagicMock:
 
 
 def test_python_file_save(
-    python_file: FileWriter, mock_file_open: MagicMock, mock_prolouqium_project_dir: MagicMock
+    python_file: FileWriter,
+    mock_file_open: MagicMock,
+    mock_prolouqium_project_dir: MagicMock,
 ) -> None:
     # pylint: disable=unused-argument
     python_file.save()
-    mock_file_open.assert_called_once_with("fake_directory/example.py", "w", encoding="utf-8")
+    mock_file_open.assert_called_once_with(
+        "fake_directory/example.py", "w", encoding="utf-8"
+    )
     mock_file_open().write.assert_called_once_with('print("Hello, world!")\n')
 
 
 def test_python_file_save_overwrite(
-    python_file: FileWriter, mock_file_open: MagicMock, mock_prolouqium_project_dir: MagicMock
+    python_file: FileWriter,
+    mock_file_open: MagicMock,
+    mock_prolouqium_project_dir: MagicMock,
 ) -> None:
     """Test that the file is overwritten if it already exists.
 
@@ -64,7 +73,9 @@ def test_python_file_save_overwrite(
     python_file.save()
 
     # Assert that the file is opened with the correct arguments and content
-    mock_file_open.assert_called_with("fake_directory/example.py", "w", encoding="utf-8")
+    mock_file_open.assert_called_with(
+        "fake_directory/example.py", "w", encoding="utf-8"
+    )
     assert mock_file_open.call_count == 2
     mock_file_open().write.assert_called_with('print("Hello, world!")\n')
     assert mock_file_open().write.call_count == 2

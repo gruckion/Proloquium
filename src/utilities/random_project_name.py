@@ -9,5 +9,4 @@ def random_project_name() -> str:
     Returns:
         str: random project name
     """
-
     return fake.word().lower()

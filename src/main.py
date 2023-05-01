@@ -25,7 +25,10 @@ def main(task_description: str):
     project_name = random_project_name()
 
     # Generate the initial Python program
-    project_path = create_project(template=CookiecutterTemplate.DEFAULT, extra_context={"project_name": project_name})
+    project_path = create_project(
+        template=CookiecutterTemplate.DEFAULT,
+        extra_context={"project_name": project_name},
+    )
 
     # Load the template and chat model
     template = create_template_from_file("src/prompts/code.md")

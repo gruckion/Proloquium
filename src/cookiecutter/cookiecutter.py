@@ -28,7 +28,9 @@ class ProjectContext(BaseModel):
     add_badges: bool
 
 
-def create_project(template: CookiecutterTemplate, extra_context: ProjectContext) -> str:
+def create_project(
+    template: CookiecutterTemplate, extra_context: ProjectContext
+) -> str:
     project_name = extra_context["project_name"]
 
     print(f"Creating project: {project_name}")
@@ -53,7 +55,11 @@ def create_project(template: CookiecutterTemplate, extra_context: ProjectContext
 
     # Create the project using the specified template, context, and output directory
     cookiecutter(
-        template=template.value, checkout=None, no_input=True, extra_context=extra_context, output_dir=output_dir
+        template=template.value,
+        checkout=None,
+        no_input=True,
+        extra_context=extra_context,
+        output_dir=output_dir,
     )
 
     return os.path.join(output_dir, project_name)

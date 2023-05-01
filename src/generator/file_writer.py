@@ -26,7 +26,6 @@ class FileWriter:
 
     def save(self, project_path: str) -> None:
         """Save the content to the file."""
-
         print(f"Saving: {self.filename}")
 
         full_path = os.path.join(project_path, self.filename)

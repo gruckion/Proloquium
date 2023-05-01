@@ -4,7 +4,8 @@ from docker.models.containers import Container, ExecResult
 
 def start_container(working_dir: str, volumes) -> Container:
     """
-    Pulls the desired Docker image, creates and runs a Docker container in detached mode.
+    Pulls the desired Docker image,
+    creates and runs a Docker container in detached mode.
 
     Returns:
         Container: A Docker container object.

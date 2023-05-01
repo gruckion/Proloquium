@@ -28,7 +28,10 @@ def input_text_no_file_name():
 
 @pytest.fixture
 def input_text_no_code_block():
-    return "This is an example text with a file name but no code block.\n" "File: `project_name/src/example.py`\n"
+    return (
+        "This is an example text with a file name but no code block.\n"
+        "File: `project_name/src/example.py`\n"
+    )
 
 
 @pytest.fixture

@@ -103,7 +103,6 @@ class Workspace:
             If the path is outside the root and the root is restricted.
 
         """
-
         # Posix systems disallow null bytes in paths. Windows is agnostic about it.
         # Do an explicit check here for all sorts of null byte representations.
 
@@ -121,13 +120,17 @@ class Workspace:
         logger.debug(f"Resolved root as '{root}'")
 
         if relative_path.is_absolute():
-            raise ValueError(f"Attempted to access absolute path '{relative_path}' in workspace '{root}'.")
+            raise ValueError(
+                f"Attempted to access absolute path '{relative_path}' in workspace '{root}'."
+            )
 
         full_path = root.joinpath(relative_path).resolve()
 
         logger.debug(f"Joined paths as '{full_path}'")
 
         if restrict_to_root and not full_path.is_relative_to(root):
-            raise ValueError(f"Attempted to access path '{full_path}' outside of workspace '{root}'.")
+            raise ValueError(
+                f"Attempted to access path '{full_path}' outside of workspace '{root}'."
+            )
 
         return full_path

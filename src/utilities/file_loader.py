@@ -12,5 +12,5 @@ def load_file_content(file_path: str, encoding: Optional[str] = "utf-8") -> str:
     Returns:
         str: The content of the file.
     """
-    with open(file_path, "r", encoding=encoding) as file:
+    with open(file_path, encoding=encoding) as file:
         return file.read()

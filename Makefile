@@ -9,7 +9,7 @@ coverage:  # run unit tests and generate coverage report
 
 format:  # run code formatters
 	poetry run black .
-	poetry run ruff --select I --fix .
+	poetry run ruff --fix .
 
 
 PYTHON_FILES=.

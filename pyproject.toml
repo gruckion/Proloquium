@@ -77,7 +77,23 @@ select = [
     "INP", # flake8-no-pep420
     "T20", # flake8-print
 ]
-ignore = []
+ignore = [
+    "PTH123", # `open("foo")` should be replaced by `Path("foo").open()`
+    "PTH120", # os.path.dirname` should be replaced by `.parent`
+    "PTH118", # `os.path.join` should be replaced by foo_path / "bar"
+    "PTH107", # `os.remove` should be replaced by `.unlink()`
+    "T201", # `print` found
+    "S101", # Use of assert detected
+    "G004", # Logging statement uses string formatting
+    "A003", # Class attribute is shadowing a python builtin
+    "PLR2004", # Magic value used in comparison
+    "PTH110", #`os.path.exists` should be replaced by `.exists()`
+    "PTH103", #`os.makedirs` should be replaced by `.mkdir(parents=True)`
+    "PTH111", # `os.path.expanduser` should be replaced by `.expanduser()`
+    "PLR0913", # Too many arguments to function call (6/5)
+    "D101", # Missing docstring in public class
+    "E501", # Line too long (89 > 88 characters)
+]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
@@ -184,7 +200,7 @@ disable= [
 
 
 [tool.black]
-line-length = 120
+line-length = 88
 target_version = ['py37', 'py38', 'py39', 'py310']
 exclude = '''
 (
@@ -292,8 +308,12 @@ directory = "coverage_html_report"
 [tool.coverage.xml]
 output = "coverage.xml"
 
-
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins."flake8.extension"]
+"INI" = "flake8_init_creator.plugin:plugin"
+
+[tool.poetry.plugins."flake8.options"]
+"INI" = "flake8_init_creator.plugin:parse_options"

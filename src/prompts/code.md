@@ -2,51 +2,57 @@
 
 Generate a Python program for the following task: {task_description}.
 
-Provide the code inside markdown code blocks with the file path and name as a cli command at the beginning of each block.
-
-Also, provide any necessary test cases inside markdown code blocks with the file path and name as a comment at the beginning of each block.
-
 Critical rules:
 
 - Code must be declaritive, pythonic, with readable variable names
-- Must use pytest
-- Use fixtures when possible to avoid repetition.
-- Split into # arrange, # act, # assert sections.
-- Mock filesystem and network calls when possible.
-- Must be strongly typed.
-- File path/name must be correct.
+- Provide a list of depencies that must be installed to run the program
+- If any files are created by the program, they must be saved in the `output` directory
+- If any files are read by the program, they must be read from the `input` directory
+- The response from the program must be saved in the `rsults` directory as `result.*`
+- The result must be a suitable format for the task (e.g. a CSV file, a plot, audio / video file, etc.)
 
 For example:
 
-File: `src/{project_name}/example.py`
+File: `example.py`
 
 ```python
-"""This is an example module."""
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
 
-def example_function(input: Type):
-    """This is an example function."""
-    pass
+# Set directory paths
+input_path = 'inputs/titanic.csv'
+output_dir = 'output/'
 
-    # ... more functions and classes to meet the requirements
+# Load Titanic data from CSV
+df = pd.read_csv(input_path)
+
+# Group passengers by class and age, and then compute the survival rate
+class_age = df.groupby(['pclass','age'])['survived'].mean().reset_index()
+
+# Create two plots: one for first class, and one for second class
+for pclass in [1,2]:
+    # Subset data
+    class_subset = class_age[class_age['pclass']==pclass]
+
+    # Create plot
+    plt.plot(class_subset['age'], class_subset['survived'])
+    plt.title(f'Titanic Survival Rate: Class {pclass}')
+    plt.xlabel('Age')
+    plt.ylabel('Survival Rate')
+    plt.ylim(0,1)
+    plt.grid(True)
+
+    # Save plot
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    plt.savefig(output_dir + f'titanic_class_{pclass}_plot.png')
+    plt.clf()
 ```
 
-File: `tests/{project_name}/test_example.py`
-
-```python
-"""This is an example test module."""
-
-from {project_name}.example import example_function
-
-def test_example_function(input: Type):
-    """This is an example test."""
-    # arrange
-    # ... more fixtures to meet the requirements
-
-    # act
-    # ... more actions to meet the requirements
-
-    # assert
-    assert example_function() is None
-
-    # ... more assertions and tests to meet the requirements
-```
+Dependencies:
+- `numpy`
+- `pandas`
+- `matplotlib`
+- `seaborn`
+- `scikit-learn`

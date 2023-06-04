@@ -1,13 +1,14 @@
-import gradio as gr
 import random
 import time
+
+import gradio as gr
 
 with gr.Blocks() as demo:
     chatbot = gr.Chatbot()
     msg = gr.Textbox()
     clear = gr.Button("Clear")
 
-    def user(user_message, history):
+    def user(user_meØssage, history):
         return "", history + [[user_message, None]]
 
     def bot(history):

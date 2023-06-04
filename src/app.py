@@ -1,84 +1,37 @@
-
+import asyncio
+import json
+import logging
 
 import chainlit as cl
 from dotenv import load_dotenv
-from langchain import LLMChain, LLMMathChain, OpenAI, PromptTemplate, SerpAPIWrapper
-from langchain.agents import Tool, initialize_agent
-from langchain.chat_models import ChatOpenAI
+from jsonrpcclient import Ok, parse_json, request_json
+from langchain import LLMChain, OpenAI, PromptTemplate
+from websockets.client import connect
 
 load_dotenv()
 
-template = """Question: {question}
+TEMPLATE = """Question: {question}
 
 Answer: Let's think step by step."""
+
 
 @cl.langchain_factory
 def factory():
     llm = OpenAI(temperature=0, streaming=True)
-    flag = True
+    prompt = PromptTemplate(template=TEMPLATE, input_variables=["question"])
+    return LLMChain(prompt=prompt, llm=llm, verbose=True)
 
-    if flag:
-        prompt = PromptTemplate(template=template, input_variables=["question"])
-        return LLMChain(prompt=prompt, llm=llm, verbose=True)
-
-
-    chat_llm = ChatOpenAI(temperature=0)
-    search = SerpAPIWrapper()
-    llm_math_chain = LLMMathChain.from_llm(llm=chat_llm, verbose=True)
-
-    tools = [
-        Tool(
-            name="Search",
-            func=search.run,
-            description="useful for when you need to answer questions about current events. You should ask targeted questions",
-        ),
-        Tool(
-            name="Calculator",
-            func=llm_math_chain.run,
-            description="useful for when you need to answer questions about math",
-        ),
-    ]
-    return initialize_agent(
-        tools, llm, agent="chat-zero-shot-react-description", verbose=True
-    )
-
-@cl.action_callback("action_button")
-def on_action(action):
-    cl.Message(content=f"Executed {action.name}").send()
-
-    # Sending an image with the local file path
-    elements = [
-    cl.LocalImage(name="image1", display="inline", path="./assets/cat.jpg")
-    ]
-
-    cl.Message(content="Look at this local image!", elements=elements).send()
-
-    # Optionally remove the action button from the chatbot user interface
-    action.remove()
 
 @cl.on_chat_start
 def start():
-    pass
-    # Sending an action button within a chatbot message
-    # actions = [
-    #     cl.Action(name="action_button", value="example_value", description="Click me!")
-    # ]
-
-    # cl.Message(content="Interact with this action button:", actions=actions).send()
-
-    # res = cl.AskUserMessage(content="What is your name?", timeout=10).send()
-    # if res:
-    #     cl.Message(
-    #         content=f"Your name is: {res['content']}",
-    #     ).send()
-
-
     file = None
 
     # Wait for the user to upload a file
     while file is None:
         file = cl.AskFileMessage(
-            content="Please upload a text file to begin!", accept=["text/plain"]
+            content="Please upload a text file to begin!",
+            accept=["*"],
+            max_size_mb=10,
         ).send()
     # Decode the file
     text = file.content.decode("utf-8")
@@ -87,3 +40,34 @@ def start():
     cl.Message(
         content=f"`{file.name}` uploaded, it contains {len(text)} characters!"
     ).send()
+
+    cl.Message(
+        content=f"```python\n{text}",
+    ).send()
+
+    # Create a new event loop
+    new_event_loop = asyncio.new_event_loop()
+    # Set the new event loop as the current event loop
+    asyncio.set_event_loop(new_event_loop)
+    # Run the main function using the new event loop
+    initialize = new_event_loop.run_until_complete(main())
+
+    if initialize is not None:
+        # Pretty format the JSON response
+        initialize_json = json.dumps(initialize.result, indent=4)
+        cl.Message(
+            content=f"```json\n{initialize_json}",
+        ).send()
+
+async def main() -> None:
+    """Handle request"""
+    async with connect("ws://localhost:2087") as socket:
+        await socket.send(request_json("initialize"))
+        response = parse_json(await socket.recv())
+
+    if isinstance(response, Ok):
+        print(response.result)
+        return response
+
+    logging.error(response.message)
+    return None

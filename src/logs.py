@@ -2,15 +2,13 @@
 import logging
 from logging import LogRecord
 import os
-import random
 import re
+import secrets
 import time
 
 from colorama import Fore, Style
 
 from src.singleton import Singleton
-
-# from src.speech import say_text
 
 
 class Logger(metaclass=Singleton):
@@ -129,24 +127,22 @@ class Logger(metaclass=Singleton):
     ):
         if message and isinstance(message, list):
             message = " ".join(message)
-        self.logger.log(
-            level, message, extra={"title": str(title), "color": str(title_color)}
-        )
+        self.logger.log(level, message, extra={"title": title, "color": title_color})
 
     def set_level(self, level):
         self.logger.setLevel(level)
         self.typing_logger.setLevel(level)
 
-    def double_check(self, additionalText=None):
-        if not additionalText:
-            additionalText = (
+    def double_check(self, additional_text=None):
+        if not additional_text:
+            additional_text = (
                 "Please ensure you've setup and configured everything"
                 " correctly. Read https://github.com/Torantulino/Auto-GPT#readme to "
                 "double check. You can also create a github issue or join the discord"
                 " and ask there!"
             )
 
-        self.typewriter_log("DOUBLE CHECK CONFIGURATION", Fore.YELLOW, additionalText)
+        self.typewriter_log("DOUBLE CHECK CONFIGURATION", Fore.YELLOW, additional_text)
 
 
 """
@@ -155,6 +151,12 @@ Output stream to console using simulated typing
 
 
 class TypingConsoleHandler(logging.StreamHandler):
+    """This class is used to simulate typing in console
+
+    Args:
+        logging (logging.StreamHandler): The logging handler
+    """
+
     def emit(self, record):
         min_typing_speed = 0.05
         max_typing_speed = 0.01
@@ -166,7 +168,7 @@ class TypingConsoleHandler(logging.StreamHandler):
                 print(word, end="", flush=True)
                 if i < len(words) - 1:
                     print(" ", end="", flush=True)
-                typing_speed = random.uniform(min_typing_speed, max_typing_speed)
+                typing_speed = secrets.randbelow(max_typing_speed - min_typing_speed) + min_typing_speed
                 time.sleep(typing_speed)
                 # type faster after each word
                 min_typing_speed = min_typing_speed * 0.95
@@ -239,12 +241,8 @@ def print_assistant_thoughts(
         elif isinstance(assistant_thoughts_plan, dict):
             assistant_thoughts_plan = str(assistant_thoughts_plan)
 
-        # Split the input_string using the newline character and dashes
         lines = assistant_thoughts_plan.split("\n")
-        for line in lines:
-            line = line.lstrip("- ")
+        for i in lines:
+            line = i.lstrip("- ")
             logger.typewriter_log("- ", Fore.GREEN, line.strip())
     logger.typewriter_log("CRITICISM:", Fore.YELLOW, f"{assistant_thoughts_criticism}")
-    # Speak the assistant's thoughts
-    # if speak_mode and assistant_thoughts_speak:
-    #     say_text(assistant_thoughts_speak)

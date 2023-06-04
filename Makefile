@@ -17,10 +17,9 @@ lint: PYTHON_FILES=.
 lint_diff: PYTHON_FILES=$(shell git diff --name-only --diff-filter=d master | grep -E '\.py$$')
 
 lint lint_diff:  # run linters
-	poetry run mypy $(PYTHON_FILES)
 	poetry run black $(PYTHON_FILES) --check
 	poetry run ruff .
-	poetry run ruff check
+	poetry run mypy $(PYTHON_FILES)
 
 test:  # run unit tests
 	poetry run pytest tests/unit

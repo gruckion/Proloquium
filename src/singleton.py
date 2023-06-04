@@ -5,7 +5,7 @@ import abc
 class Singleton(abc.ABCMeta, type):
     """Singleton metaclass for ensuring only one instance of a class."""
 
-    _instances = {}
+    _instances: dict[type, "Singleton"] = {}
 
     def __call__(cls, *args, **kwargs):
         """Call method for the singleton metaclass."""

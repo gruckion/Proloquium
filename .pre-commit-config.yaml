@@ -1,0 +1,156 @@
+default_stages: [push]
+default_language_version:
+  python: python3
+
+ci:
+  skip: [mypy, pylint]
+  autofix_commit_msg: 🎨 [pre-commit.ci] Auto format from pre-commit.com hooks
+  autoupdate_commit_msg: ⬆ [pre-commit.ci] pre-commit autoupdate
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: mixed-line-ending
+      - id: sort-simple-yaml
+      - id: check-docstring-first
+        exclude: (docs/conf.py)
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+        args:
+          - --unsafe
+      - id: debug-statements
+        exclude: (tests/messages/data/)
+      - id: end-of-file-fixer
+        exclude: (tests/messages/data/)
+      - id: name-tests-test
+        args: ["--django"]
+        exclude: (tests/messages/data/)
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: v6.2.1
+    hooks:
+      - id: beautysh
+        args: ["-i", "2"]
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.270
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        stages: [commit]
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.13
+    hooks:
+      - id: validate-pyproject
+        name: Validate pyproject.toml
+
+  - repo: local
+    hooks:
+      - id: run-code-quality
+        name: Run code quality checks
+        entry: pytest tests/codebase/test_code_quality.py
+        language: conda
+        pass_filenames: false
+
+      - id: run-eslint
+        name: Run ESLint
+        entry: pytest tests/codebase/test_eslint.py
+        language: conda
+        pass_filenames: false
+
+      - id: run-isort
+        name: Run isort checks
+        entry: pytest tests/codebase/test_isort.py
+        language: conda
+        pass_filenames: false
+
+      - id: run-ruff
+        name: Run ruff checks
+        entry: pytest tests/codebase/test_ruff.py
+        language: conda
+        pass_filenames: false
+
+      - id: validate-json
+        name: Validate JSON files
+        entry: pytest tests/codebase/test_json.py
+        language: conda
+        pass_filenames: false
+
+      - id: validate-license
+        name: Validate LICENSE file
+        entry: pytest tests/codebase/test_license.py
+        language: conda
+        pass_filenames: false
+
+      - id: check-exclusions
+        name: Verify package exclusions
+        entry: pytest tests/codebase -k test_no
+        language: conda
+        pass_filenames: false
+
+      - id: check-optimized
+        name: Verify that OO mode works
+        entry: pytest tests/codebase/test_python_execution_with_OO.py
+        language: conda
+        pass_filenames: false
+
+      - id: check-windows-filenames
+        name: Check for reserved windows filenames
+        entry: pytest tests/codebase/test_windows_reserved_filenames.py
+        language: conda
+        pass_filenames: false
+
+      - id: protect-branches
+        name: Protect Git branches
+        entry: python scripts/hooks/protect_branches.py
+        language: conda
+        pass_filenames: false
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.4.0
+    hooks:
+      - id: pyupgrade
+        args:
+          - --py3-plus
+          - --keep-runtime-typing
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: isort (python)
+      - id: isort
+        name: isort (cython)
+        types: [cython]
+      - id: isort
+        name: isort (pyi)
+        types: [pyi]
+
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+        additional_dependencies: ["tomli"]
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: "1.7.5"
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml", "--quiet", "--format=custom"]
+        files: ^dvc/
+        additional_dependencies: [".[toml]"]

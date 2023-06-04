@@ -21,6 +21,8 @@ docker = "^6.0.1"
 colorama = "^0.4.6"
 ptyprocess = "^0.7.0"
 gradio = "^3.28.1"
+pylint-pydantic = "^0.1.8"
+pre-commit = "^3.3.2"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.3.0"

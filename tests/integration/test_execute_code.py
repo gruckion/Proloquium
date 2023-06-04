@@ -1,50 +1,55 @@
-import random
-import string
-import tempfile
+from unittest.mock import patch
 
 import pytest
-from pytest_mock import MockerFixture
 
-from src.config.config import Config
-import src.executor.execute_code as sut
+from src.executor.execute_code import (
+    execute_command,
+    shutdown_container,
+    start_container,
+)
+
+
+# Setup mock Docker client and container
+@pytest.fixture
+def mock_docker():
+    with patch("src.executor.execute_code.docker") as mock_docker:
+        mock_docker.from_env().images.pull.return_value = "pulled_image"
+        mock_docker.from_env().containers.run.return_value = "run_container"
+        yield mock_docker
 
 
 @pytest.fixture
-def config_allow_execute(config: Config, mocker: MockerFixture):
-    yield mocker.patch.object(config, "execute_local_commands", True)
+def mock_container():
+    with patch("src.executor.execute_code.Container", autospec=True) as mock_container:
+        mock_container.exec_run.return_value = "exec_result"
+        mock_container.stop.return_value = None
+        mock_container.remove.return_value = None
+        yield mock_container
 
 
-@pytest.fixture
-def python_test_file(config: Config, random_string):
-    temp_file = tempfile.NamedTemporaryFile(dir=config.workspace_path, suffix=".py")
-    temp_file.write(str.encode(f"print('Hello {random_string}!')"))
-    temp_file.flush()
-
-    yield temp_file.name
-    temp_file.close()
-
-
-@pytest.fixture
-def random_string():
-    return "".join(random.choice(string.ascii_lowercase) for _ in range(10))
-
-
-def test_execute_python_file(python_test_file: str, random_string: str):
-    result = sut.execute_python_file(python_test_file)
-    assert result == f"Hello {random_string}!\n"
-
-
-def test_execute_python_file_invalid():
-    assert all(
-        s in sut.execute_python_file("not_python").lower()
-        for s in ["error:", "invalid", ".py"]
+def test_start_container(mock_docker):
+    result = start_container("test_dir", {"vol1": {}})
+    mock_docker.from_env().images.pull.assert_called_once_with("python:3-alpine")
+    mock_docker.from_env().containers.run.assert_called_once_with(
+        "python:3-alpine",
+        detach=True,
+        tty=True,
+        stdin_open=True,
+        working_dir="test_dir",
+        volumes={"vol1": {}},
     )
-    assert all(
-        s in sut.execute_python_file("notexist.py").lower()
-        for s in ["error:", "does not exist"]
+    assert result == "run_container"
+
+
+def test_execute_command(mock_container):
+    result = execute_command(mock_container, "test_command")
+    mock_container.exec_run.assert_called_once_with(
+        "test_command", stdout=True, stderr=True, stream=True
     )
+    assert result == "exec_result"
 
 
-def test_execute_shell(config_allow_execute, random_string):
-    result = sut.execute_shell(f"echo 'Hello {random_string}!'")
-    assert f"Hello {random_string}!" in result
+def test_shutdown_container(mock_container):
+    shutdown_container(mock_container)
+    mock_container.stop.assert_called_once()
+    mock_container.remove.assert_called_once()

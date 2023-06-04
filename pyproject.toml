@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "src"
 version = "0.1.0"
-description = "A Python project generator that creates simple to moderately complex Python applications with CLI and GUI interfaces, along with unit tests and documentation."
+description = "A Python project generator that creates simple to moderately complex Python applications with CLI and GUI interfaces, along with unit tests and documentation via a chat interface."
 authors = ["Stephen Rayner <stephen.r.rayner@gmail.com>"]
 readme = "README.md"
 

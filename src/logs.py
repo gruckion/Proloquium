@@ -168,7 +168,10 @@ class TypingConsoleHandler(logging.StreamHandler):
                 print(word, end="", flush=True)
                 if i < len(words) - 1:
                     print(" ", end="", flush=True)
-                typing_speed = secrets.randbelow(max_typing_speed - min_typing_speed) + min_typing_speed
+                typing_speed = (
+                    secrets.randbelow(max_typing_speed - min_typing_speed)
+                    + min_typing_speed
+                )
                 time.sleep(typing_speed)
                 # type faster after each word
                 min_typing_speed = min_typing_speed * 0.95

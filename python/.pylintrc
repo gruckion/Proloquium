@@ -1,4 +1,0 @@
-[MESSAGES CONTROL]
-load-plugins = pylint_pydantic
-max-line-length = 120
-disable=W1203,R0903,W0105

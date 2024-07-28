@@ -63,8 +63,10 @@ def start():
         ).send()
 
         # Create the text_document_symbols_payload
-        symbols_payload = builder.build_text_document_symbols_payload("file_uri")  # replace with the correct file_uri
+        symbols_payload = builder.build_text_document_symbols_payload("/Users/sigex/workdir/proloquium/src/app.py")
         symbols_payload_response = new_event_loop.run_until_complete(lsp_send(symbols_payload))
+
+        print("symbols_payload_response: ", symbols_payload_response)
 
         if symbols_payload_response is not None:
             symbols_payload_response_json = json.dumps(symbols_payload_response.result, indent=4)
@@ -100,7 +102,7 @@ class LSPRequestBuilder:
 
     def initialize_payload(self):
         return request_json("initialize", {
-            "rootPath": self.root_path,
+            "root_path": self.root_path,
             "initializationOptions": {}
         })
 
